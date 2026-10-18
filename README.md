@@ -1,17 +1,5 @@
 <!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml -->
 
-<div align="center">
-
-<h1>Mohammed Irfan Ali</h1>
-
-<code>Software Engineer</code>&nbsp;&nbsp;·&nbsp;&nbsp;building in robotics
-
-<sub>perception &nbsp;/&nbsp; slam &nbsp;/&nbsp; sensor fusion &nbsp;/&nbsp; motion planning &nbsp;/&nbsp; 3d vision</sub>
-
-</div>
-
-<br/>
-
 ### 📊 By the numbers
 
 <div align="center">
@@ -22,7 +10,7 @@
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
-| **46** | **5** | **0** | **7** | **7** years |
+| **46** | **86** | **0** | **7** | **7** years |
 
 </div>
 
@@ -106,10 +94,3 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 | ![C++](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=C%2B%2B&color=555&labelColor=f34b7d) | `█░░░░░░░░░░░░░░░░░░░` 2.4% |
 | ![C](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=C&color=555&labelColor=555555) | `█░░░░░░░░░░░░░░░░░░░` 0.5% |
 | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Shell&color=555&labelColor=89e051) | `█░░░░░░░░░░░░░░░░░░░` 0.3% |
-
----
-
-<div align="center">
-<sub>Stats refresh daily via GitHub Actions · last updated 18 Oct 2026</sub>
-</div>
-

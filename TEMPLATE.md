@@ -1,17 +1,5 @@
 <!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml -->
 
-<div align="center">
-
-<h1>Mohammed Irfan Ali</h1>
-
-<code>Software Engineer</code>&nbsp;&nbsp;·&nbsp;&nbsp;building in robotics
-
-<sub>perception &nbsp;/&nbsp; slam &nbsp;/&nbsp; sensor fusion &nbsp;/&nbsp; motion planning &nbsp;/&nbsp; 3d vision</sub>
-
-</div>
-
-<br/>
-
 ### 📊 By the numbers
 
 <div align="center">
@@ -95,10 +83,3 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 ### 🧬 Languages across my repos
 
 {{LANGUAGES}}
-
----
-
-<div align="center">
-<sub>Stats refresh daily via GitHub Actions · last updated {{UPDATED}}</sub>
-</div>
-
