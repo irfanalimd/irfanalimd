@@ -2,12 +2,11 @@
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,55:0f2a4a,100:1f6feb&height=190&section=header&text=Mohammed%20Irfan%20Ali&fontSize=44&fontColor=ffffff&fontAlignY=36&desc=Software%20Engineer%20%C2%B7%20Building%20in%20Robotics&descSize=18&descAlignY=58&animation=fadeIn" width="100%" alt="Mohammed Irfan Ali — Software Engineer building in robotics" />
+<h1>Mohammed Irfan Ali</h1>
 
-<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=17&duration=3200&pause=900&color=58A6FF&center=true&vCenter=true&width=560&lines=Perception+%C2%B7+SLAM+%C2%B7+Sensor+Fusion;Motion+Planning+%C2%B7+3D+Vision;C%2B%2B+%C2%B7+CUDA+%C2%B7+ROS+%C2%B7+PyTorch" alt="Perception · SLAM · Sensor Fusion · Motion Planning · 3D Vision" />
+<code>Software Engineer</code>&nbsp;&nbsp;·&nbsp;&nbsp;building in robotics
 
-<a href="https://www.linkedin.com/in/irfanalimd/"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-<img src="{{TOTAL_COMMITS_BADGE}}" alt="{{TOTAL_COMMITS}} total commits" />
+<sub>perception &nbsp;/&nbsp; slam &nbsp;/&nbsp; sensor fusion &nbsp;/&nbsp; motion planning &nbsp;/&nbsp; 3d vision</sub>
 
 </div>
 
@@ -103,4 +102,3 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 <sub>Stats refresh daily via GitHub Actions · last updated {{UPDATED}}</sub>
 </div>
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1f6feb,45:0f2a4a,100:0d1117&height=90&section=footer" width="100%" alt="" />

@@ -242,7 +242,6 @@ def render(template, s):
         "CURRENT_STREAK": f"{s['current_streak']:,}",
         "LONGEST_STREAK": f"{s['longest_streak']:,}",
         "YEARS_ON_GITHUB": str(s["years_on_github"]),
-        "TOTAL_COMMITS_BADGE": badge("total commits", f"{s['total_commits']:,}", "1f6feb", "0d1117", "for-the-badge"),
         "LANGUAGES": render_languages(s["languages"]),
         "ACTIVE_PROJECTS": render_active(s["active"]),
         "UPDATED": s["now"].strftime("%d %b %Y"),
