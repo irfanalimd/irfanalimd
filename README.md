@@ -18,11 +18,11 @@
 
 | 🔥 Total commits | 📆 Commits · last 365 days | ⚡ Current streak | 🏆 Longest streak (last year) |
 |:--:|:--:|:--:|:--:|
-| **342** | **188** | **5** days | **5** days |
+| **343** | **189** | **5** days | **5** days |
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
-| **46** | **86** | **0** | **7** | **7** years |
+| **46** | **5** | **0** | **7** | **7** years |
 
 </div>
 
