@@ -10,7 +10,7 @@
 
 </div>
 
----
+<br/>
 
 ### 📊 By the numbers
 
@@ -22,7 +22,7 @@
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
-| **46** | **5** | **0** | **7** | **7** years |
+| **46** | **86** | **0** | **7** | **7** years |
 
 </div>
 
