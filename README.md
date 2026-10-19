@@ -6,11 +6,11 @@
 
 | 🔥 Total commits | 📆 Commits · last 365 days | ⚡ Current streak | 🏆 Longest streak (last year) |
 |:--:|:--:|:--:|:--:|
-| **344** | **190** | **5** days | **5** days |
+| **419** | **265** | **6** days | **6** days |
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
-| **46** | **5** | **0** | **7** | **7** years |
+| **46** | **13** | **0** | **7** | **7** years |
 
 </div>
 
@@ -78,8 +78,8 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 
 ### 🚀 Most active this year
 
+- [**explainer**](https://github.com/irfanalimd/explainer) · `147 commits` — A Claude Code skill that explains computer-science concepts by running them…
 - [**sites**](https://github.com/irfanalimd/sites) · `74 commits` — Personal publishing portal for HTML artifacts
-- [**explainer**](https://github.com/irfanalimd/explainer) · `72 commits` — A Claude Code skill that explains computer-science concepts by running them…
 - [**pstack-ports**](https://github.com/irfanalimd/pstack-ports) · `25 commits` — poteto's pstack agent skills, ported from Cursor to Claude Code and Codex
 - [**watchqueue**](https://github.com/irfanalimd/watchqueue) · `8 commits` — A collaborative movie/show selection system help your group decide what to watch by…
 - [**portfolio**](https://github.com/irfanalimd/portfolio) · `6 commits` — Personal portfolio site · irfanali.me
@@ -88,9 +88,9 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 
 | Language | Share |
 |:--|:--|
-| ![Python](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Python&color=555&labelColor=3572A5) | `███████████████░░░░░` 76.8% |
-| ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=JavaScript&color=555&labelColor=f1e05a) | `███░░░░░░░░░░░░░░░░░` 15.0% |
+| ![Python](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Python&color=555&labelColor=3572A5) | `███████████████░░░░░` 75.5% |
+| ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=JavaScript&color=555&labelColor=f1e05a) | `███░░░░░░░░░░░░░░░░░` 16.4% |
 | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=TypeScript&color=555&labelColor=3178c6) | `█░░░░░░░░░░░░░░░░░░░` 4.5% |
-| ![C++](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=C%2B%2B&color=555&labelColor=f34b7d) | `█░░░░░░░░░░░░░░░░░░░` 2.4% |
+| ![C++](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=C%2B%2B&color=555&labelColor=f34b7d) | `█░░░░░░░░░░░░░░░░░░░` 2.3% |
 | ![C](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=C&color=555&labelColor=555555) | `█░░░░░░░░░░░░░░░░░░░` 0.5% |
 | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Shell&color=555&labelColor=89e051) | `█░░░░░░░░░░░░░░░░░░░` 0.3% |
