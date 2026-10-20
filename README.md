@@ -6,7 +6,7 @@
 
 | 🔥 Total commits | 📆 Commits · last 365 days | ⚡ Current streak | 🏆 Longest streak (last year) |
 |:--:|:--:|:--:|:--:|
-| **421** | **267** | **7** days | **7** days |
+| **422** | **268** | **7** days | **7** days |
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
@@ -81,8 +81,8 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 - [**explainer**](https://github.com/irfanalimd/explainer) · `147 commits` — A Claude Code skill that explains computer-science concepts by running them…
 - [**sites**](https://github.com/irfanalimd/sites) · `74 commits` — Personal publishing portal for HTML artifacts
 - [**pstack-ports**](https://github.com/irfanalimd/pstack-ports) · `25 commits` — poteto's pstack agent skills, ported from Cursor to Claude Code and Codex
+- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `8 commits`
 - [**watchqueue**](https://github.com/irfanalimd/watchqueue) · `8 commits` — A collaborative movie/show selection system help your group decide what to watch by…
-- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `7 commits`
 
 ### 🧬 Languages across my repos
 
