@@ -1,4 +1,4 @@
-<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml -->
+<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 20 Oct 2026 -->
 
 ### 📊 By the numbers
 
@@ -10,7 +10,7 @@
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
-| **46** | **13** | **0** | **7** | **7** years |
+| **46** | **94** | **0** | **7** | **7** years |
 
 </div>
 

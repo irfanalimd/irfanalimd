@@ -40,8 +40,11 @@ jobs:
             echo "No changes."
             exit 0
           fi
+          # authored by the profile's owner, so it counts on their contribution graph;
+          # committed by the Action, so the history shows what made it
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "chore: update README stats"
+          git commit -m "chore: update README stats" \
+            --author="Mohammed Irfan Ali <55896554+irfanalimd@users.noreply.github.com>"
           git push
