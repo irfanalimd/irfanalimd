@@ -1,4 +1,4 @@
-<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 21 Oct 2026 -->
+<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 22 Oct 2026 -->
 
 ### 📊 By the numbers
 
@@ -6,11 +6,11 @@
 
 | 🔥 Total commits | 📆 Commits · last 365 days | ⚡ Current streak | 🏆 Longest streak (last year) |
 |:--:|:--:|:--:|:--:|
-| **469** | **315** | **8** days | **8** days |
+| **473** | **319** | **9** days | **9** days |
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
-| **46** | **18** | **0** | **7** | **7** years |
+| **46** | **24** | **0** | **7** | **7** years |
 
 </div>
 
@@ -79,9 +79,9 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 ### 🚀 Most active this year
 
 - [**explainer**](https://github.com/irfanalimd/explainer) · `190 commits` — A Claude Code skill that explains computer-science concepts by running them…
-- [**sites**](https://github.com/irfanalimd/sites) · `77 commits` — Personal publishing portal for HTML artifacts
+- [**sites**](https://github.com/irfanalimd/sites) · `80 commits` — Personal publishing portal for HTML artifacts
 - [**pstack-ports**](https://github.com/irfanalimd/pstack-ports) · `25 commits` — poteto's pstack agent skills, ported from Cursor to Claude Code and Codex
-- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `9 commits`
+- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `10 commits`
 - [**watchqueue**](https://github.com/irfanalimd/watchqueue) · `8 commits` — A collaborative movie/show selection system help your group decide what to watch by…
 
 ### 🧬 Languages across my repos
