@@ -1,4 +1,4 @@
-<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 28 Oct 2026 -->
+<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 29 Oct 2026 -->
 
 ### 📊 By the numbers
 
@@ -6,11 +6,11 @@
 
 | 🔥 Total commits | 📆 Commits · last 365 days | ⚡ Current streak | 🏆 Longest streak (last year) |
 |:--:|:--:|:--:|:--:|
-| **691** | **537** | **15** days | **15** days |
+| **700** | **546** | **16** days | **16** days |
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
-| **47** | **44** | **0** | **7** | **7** years |
+| **48** | **44** | **0** | **7** | **7** years |
 
 </div>
 
@@ -79,17 +79,17 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 ### 🚀 Most active this year
 
 - [**explainer**](https://github.com/irfanalimd/explainer) · `343 commits` — A Claude Code skill that explains computer-science concepts by running them…
-- [**sites**](https://github.com/irfanalimd/sites) · `124 commits` — Personal publishing portal for HTML artifacts
+- [**sites**](https://github.com/irfanalimd/sites) · `126 commits` — Personal publishing portal for HTML artifacts
 - [**pstack-ports**](https://github.com/irfanalimd/pstack-ports) · `25 commits` — poteto's pstack agent skills, ported from Cursor to Claude Code and Codex
-- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `16 commits`
+- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `17 commits`
 - [**weft**](https://github.com/irfanalimd/weft) · `15 commits` — Real-time, offline-first collaborative Markdown editor. Rust CRDT in WASM + Rust sync…
 
 ### 🧬 Languages across my repos
 
 | Language | Share |
 |:--|:--|
-| ![Python](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Python&color=555&labelColor=3572A5) | `██████████████░░░░░░` 71.8% |
-| ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=JavaScript&color=555&labelColor=f1e05a) | `███░░░░░░░░░░░░░░░░░` 16.9% |
+| ![Python](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Python&color=555&labelColor=3572A5) | `██████████████░░░░░░` 72.0% |
+| ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=JavaScript&color=555&labelColor=f1e05a) | `███░░░░░░░░░░░░░░░░░` 16.8% |
 | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=TypeScript&color=555&labelColor=3178c6) | `█░░░░░░░░░░░░░░░░░░░` 6.2% |
 | ![C++](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=C%2B%2B&color=555&labelColor=f34b7d) | `█░░░░░░░░░░░░░░░░░░░` 2.2% |
 | ![Rust](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Rust&color=555&labelColor=dea584) | `█░░░░░░░░░░░░░░░░░░░` 1.6% |
