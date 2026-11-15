@@ -1,4 +1,4 @@
-<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 14 Nov 2026 -->
+<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 15 Nov 2026 -->
 
 ### 📊 By the numbers
 
@@ -6,7 +6,7 @@
 
 | 🔥 Total commits | 📆 Commits · last 365 days | ⚡ Current streak | 🏆 Longest streak (last year) |
 |:--:|:--:|:--:|:--:|
-| **743** | **589** | **31** days | **31** days |
+| **744** | **590** | **32** days | **32** days |
 
 | 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
 |:--:|:--:|:--:|:--:|:--:|
@@ -80,7 +80,7 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 
 - [**explainer**](https://github.com/irfanalimd/explainer) · `343 commits` — A Claude Code skill that explains computer-science concepts by running them…
 - [**sites**](https://github.com/irfanalimd/sites) · `153 commits` — Personal publishing portal for HTML artifacts
-- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `33 commits`
+- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `34 commits`
 - [**pstack-ports**](https://github.com/irfanalimd/pstack-ports) · `25 commits` — poteto's pstack agent skills, ported from Cursor to Claude Code and Codex
 - [**weft**](https://github.com/irfanalimd/weft) · `15 commits` — Real-time, offline-first collaborative Markdown editor. Rust CRDT in WASM + Rust sync…
 
