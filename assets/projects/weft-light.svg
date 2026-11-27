@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="410" height="124" viewBox="0 0 410 124" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="Weft: Offline-first collaborative Markdown editor. One Rust CRDT runs in the browser and on the server.">
+<rect x="0.5" y="0.5" width="409" height="123" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<text x="20" y="36" fill="#1f2328" font-size="15" font-weight="600">Weft</text>
+<text x="20" y="60" fill="#59636e" font-size="13">Offline-first collaborative Markdown editor. One Rust CRDT</text>
+<text x="20" y="79" fill="#59636e" font-size="13">runs in the browser and on the server.</text>
+<text x="20" y="104" fill="#818b98" font-size="12">Rust  ·  WebAssembly  ·  TypeScript</text>
+<circle cx="344" cy="100" r="3.5" fill="#1a7f37"/>
+<text x="390" y="104" fill="#59636e" font-size="12" text-anchor="end">Active</text>
+</svg>

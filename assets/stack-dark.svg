@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="210" viewBox="0 0 840 210" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="Tech stack: Languages: Python, C++, CUDA, C, Rust, TypeScript; Robotics: ROS, Gazebo, ORB-SLAM3, RTAB-Map, PCL, Eigen; Vision &amp; ML: PyTorch, TensorFlow, OpenCV, YOLOv8, Mask2Former; Hardware &amp; infra: Jetson Orin NX, Intel RealSense, Docker, Linux">
+<rect x="0.5" y="0.5" width="839" height="209" rx="12" fill="#0d1117" stroke="#30363d"/>
+<text x="28" y="46.5" fill="#9198a1" font-size="13">Languages</text>
+<rect x="178.0" y="28" width="67.0" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="211.5" y="46.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Python</text>
+<rect x="253.0" y="28" width="48.2" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="277.1" y="46.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">C++</text>
+<rect x="309.2" y="28" width="60.0" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="339.2" y="46.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">CUDA</text>
+<rect x="377.2" y="28" width="34.5" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="394.5" y="46.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">C</text>
+<rect x="419.8" y="28" width="53.2" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="446.4" y="46.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Rust</text>
+<rect x="481.0" y="28" width="91.1" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="526.6" y="46.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">TypeScript</text>
+<text x="28" y="88.5" fill="#9198a1" font-size="13">Robotics</text>
+<rect x="178.0" y="70" width="51.5" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="203.8" y="88.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">ROS</text>
+<rect x="237.5" y="70" width="68.9" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="271.9" y="88.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Gazebo</text>
+<rect x="314.4" y="70" width="100.2" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="364.5" y="88.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">ORB-SLAM3</text>
+<rect x="422.6" y="70" width="89.8" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="467.5" y="88.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">RTAB-Map</text>
+<rect x="520.4" y="70" width="51.5" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="546.1" y="88.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">PCL</text>
+<rect x="579.9" y="70" width="58.9" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="609.3" y="88.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Eigen</text>
+<text x="28" y="130.5" fill="#9198a1" font-size="13">Vision &amp; ML</text>
+<rect x="178.0" y="112" width="75.5" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="215.8" y="130.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">PyTorch</text>
+<rect x="261.5" y="112" width="97.1" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="310.1" y="130.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">TensorFlow</text>
+<rect x="366.6" y="112" width="72.1" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="402.7" y="130.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">OpenCV</text>
+<rect x="446.8" y="112" width="74.1" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="483.8" y="130.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">YOLOv8</text>
+<rect x="528.9" y="112" width="108.1" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="582.9" y="130.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Mask2Former</text>
+<text x="28" y="172.5" fill="#9198a1" font-size="13">Hardware &amp; infra</text>
+<rect x="178.0" y="154" width="115.1" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="235.6" y="172.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Jetson Orin NX</text>
+<rect x="301.1" y="154" width="117.7" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="360.0" y="172.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Intel RealSense</text>
+<rect x="426.9" y="154" width="67.0" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="460.4" y="172.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Docker</text>
+<rect x="501.9" y="154" width="58.9" height="28" rx="14.0" fill="#161b22" stroke="#30363d"/>
+<text x="531.3" y="172.5" fill="#e6edf3" font-size="12.5" text-anchor="middle">Linux</text>
+</svg>

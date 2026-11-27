@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="410" height="124" viewBox="0 0 410 124" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="Fine-grained ViT: Vision Transformer with hierarchical attention for fine-grained bird classification.">
+<rect x="0.5" y="0.5" width="409" height="123" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<text x="20" y="36" fill="#1f2328" font-size="15" font-weight="600">Fine-grained ViT</text>
+<text x="20" y="60" fill="#59636e" font-size="13">Vision Transformer with hierarchical attention for</text>
+<text x="20" y="79" fill="#59636e" font-size="13">fine-grained bird classification.</text>
+<text x="20" y="104" fill="#818b98" font-size="12">ViT  ·  CUB-200-2011</text>
+</svg>
