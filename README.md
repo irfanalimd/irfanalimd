@@ -1,6 +1,6 @@
 <!-- Edit TEMPLATE.md and profile.json, not README.md. README.md and assets/ are regenerated daily by .github/workflows/update-readme.yml · last run 27 Nov 2026 -->
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg"><img src="assets/header-light.svg" width="100%" alt="777 commits, 623 in the past year, 45-day streak, 44 pull requests, 50 public repos."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/header-dark.svg"><img src="assets/header-light.svg" width="100%" alt="778 commits, 624 in the past year, 45-day streak, 44 pull requests, 50 public repos."></picture>
 
 ### Projects
 
