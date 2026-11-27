@@ -7,7 +7,7 @@ also counts private contributions).
 
 Outputs:
   README.md                      from TEMPLATE.md
-  assets/header-{light,dark}.svg name, stats and language bar
+  assets/header-{light,dark}.svg stats and language bar
   assets/stack-{light,dark}.svg  tech stack
 """
 
@@ -243,12 +243,8 @@ def lang_color(color, theme):
 # ---------------------------------------------------------------------------
 def render_header(s, cfg, theme):
     t = THEMES[theme]
-    W, H, pad = 840, 252, 28
-    out = svg_open(W, H, t, f"{cfg['name']}: GitHub stats")
-    out.append(f'<text x="{pad}" y="52" fill="{t["ink"]}" font-size="26" font-weight="600" '
-               f'letter-spacing="-0.4">{escape(cfg["name"])}</text>')
-    out.append(f'<text x="{pad}" y="78" fill="{t["muted"]}" font-size="14">{escape(cfg["tagline"])}</text>')
-    out.append(f'<line x1="{pad}" y1="102" x2="{W - pad}" y2="102" stroke="{t["border"]}"/>')
+    W, H, pad = 840, 152, 28
+    out = svg_open(W, H, t, "GitHub stats")
 
     streak_label = "Day streak"
     if s["longest_streak"] > s["current_streak"]:
@@ -264,16 +260,16 @@ def render_header(s, cfg, theme):
     for i, (value, label) in enumerate(stats):
         x = pad + i * col + (0 if i == 0 else 22)
         if i:
-            out.append(f'<line x1="{pad + i * col:.1f}" y1="124" x2="{pad + i * col:.1f}" y2="170" '
+            out.append(f'<line x1="{pad + i * col:.1f}" y1="24" x2="{pad + i * col:.1f}" y2="70" '
                        f'stroke="{t["border"]}"/>')
-        out.append(f'<text x="{x:.1f}" y="150" fill="{t["ink"]}" font-size="24" font-weight="600" '
+        out.append(f'<text x="{x:.1f}" y="50" fill="{t["ink"]}" font-size="24" font-weight="600" '
                    f'letter-spacing="-0.3">{value}</text>')
-        out.append(f'<text x="{x:.1f}" y="170" fill="{t["muted"]}" font-size="12.5">{escape(label)}</text>')
+        out.append(f'<text x="{x:.1f}" y="70" fill="{t["muted"]}" font-size="12.5">{escape(label)}</text>')
 
     # language bar: one rounded track, segments separated by 2px of background
     langs = sorted(s["languages"].items(), key=lambda kv: kv[1]["size"], reverse=True)[:TOP_LANGUAGES]
     total = sum(v["size"] for _, v in langs) or 1
-    bar_y, bar_h, x = 196, 8, float(pad)
+    bar_y, bar_h, x = 96, 8, float(pad)
     span = W - 2 * pad - 2 * (len(langs) - 1)
     out.append(f'<clipPath id="bar"><rect x="{pad}" y="{bar_y}" width="{W - 2 * pad}" height="{bar_h}" rx="4"/></clipPath>')
     out.append('<g clip-path="url(#bar)">')
@@ -287,44 +283,36 @@ def render_header(s, cfg, theme):
     for name, info in langs:
         share = info["size"] / total
         pct = f"{share * 100:.0f}%" if share >= 0.01 else "<1%"
-        out.append(f'<circle cx="{x + 4:.1f}" cy="226" r="4" fill="{lang_color(info["color"], theme)}"/>')
-        out.append(f'<text x="{x + 14:.1f}" y="230" font-size="12" fill="{t["ink"]}">{escape(name)}'
+        out.append(f'<circle cx="{x + 4:.1f}" cy="126" r="4" fill="{lang_color(info["color"], theme)}"/>')
+        out.append(f'<text x="{x + 14:.1f}" y="130" font-size="12" fill="{t["ink"]}">{escape(name)}'
                    f'<tspan fill="{t["faint"]}"> {escape(pct)}</tspan></text>')
         x += 14 + text_width(f"{name} {pct}", 12) + 18
-    out.append(f'<text x="{W - pad}" y="230" font-size="12" fill="{t["faint"]}" text-anchor="end">'
+    out.append(f'<text x="{W - pad}" y="130" font-size="12" fill="{t["faint"]}" text-anchor="end">'
                f'Since {s["since"]} · updated {s["now"].strftime("%b %-d, %Y")}</text>')
     out.append("</svg>")
     return "\n".join(out)
 
 
 def render_stack(cfg, theme):
+    """Small pills flowing across the width, groups in order, no labels or frame."""
     t = THEMES[theme]
-    W, pad, label_w, chip_h, gap, size = 840, 28, 150, 28, 8, 12.5
-    rows, y = [], 28
-    for group in cfg["stack"]:
-        x, row, first = pad + label_w, [], True
-        for item in group["items"]:
-            w = text_width(item, size) + 26
-            if x + w > W - pad and row:  # wrap onto another line within the same group
-                rows.append((group["label"] if first else "", y, row))
-                first = False
-                y += chip_h + gap
-                x, row = pad + label_w, []
-            row.append((item, x, w))
-            x += w + gap
-        rows.append((group["label"] if first else "", y, row))
-        y += chip_h + 14
-    H = y + 14
-    out = svg_open(W, H, t, "Tech stack: " + "; ".join(
-        f"{g['label']}: {', '.join(g['items'])}" for g in cfg["stack"]))
-    for label, ry, row in rows:
-        if label:
-            out.append(f'<text x="{pad}" y="{ry + 18.5}" fill="{t["muted"]}" font-size="13">{escape(label)}</text>')
-        for item, cx, w in row:
-            out.append(f'<rect x="{cx:.1f}" y="{ry}" width="{w:.1f}" height="{chip_h}" rx="{chip_h / 2}" '
-                       f'fill="{t["chip"]}" stroke="{t["border"]}"/>')
-            out.append(f'<text x="{cx + w / 2:.1f}" y="{ry + 18.5}" fill="{t["ink"]}" font-size="{size}" '
-                       f'text-anchor="middle">{escape(item)}</text>')
+    W, chip_h, gap, size = 840, 24, 6, 12
+    items = [item for group in cfg["stack"] for item in group["items"]]
+    x, y, chips = 0.0, 1.0, []
+    for item in items:
+        w = text_width(item, size) + 20
+        if x + w > W and x:
+            x, y = 0.0, y + chip_h + gap
+        chips.append((item, x, y, w))
+        x += w + gap
+    H = int(y + chip_h + 2)
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
+           f'font-family="{FONT}" role="img" aria-label="{escape("Tech stack: " + ", ".join(items))}">']
+    for item, cx, cy, w in chips:
+        out.append(f'<rect x="{cx + 0.5:.1f}" y="{cy:.1f}" width="{w - 1:.1f}" height="{chip_h}" rx="{chip_h / 2}" '
+                   f'fill="{t["chip"]}" stroke="{t["border"]}"/>')
+        out.append(f'<text x="{cx + w / 2:.1f}" y="{cy + 16:.1f}" fill="{t["ink"]}" font-size="{size}" '
+                   f'text-anchor="middle">{escape(item)}</text>')
     out.append("</svg>")
     return "\n".join(out)
 
@@ -357,7 +345,7 @@ def render_projects(cfg, s):
 
 
 def header_alt(cfg, s):
-    return (f"{cfg['name']}. {cfg['tagline']}. {s['total_commits']:,} commits, {s['year_commits']:,} in the "
+    return (f"{s['total_commits']:,} commits, {s['year_commits']:,} in the "
             f"past year, {s['current_streak']}-day streak, {s['total_prs']:,} pull requests, "
             f"{s['public_repos']:,} public repos.")
 
