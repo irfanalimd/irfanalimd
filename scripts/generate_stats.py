@@ -1,34 +1,53 @@
 #!/usr/bin/env python3
-"""Render README.md from TEMPLATE.md using live GitHub stats.
+"""Render README.md and its SVG cards from TEMPLATE.md + profile.json using live GitHub stats.
 
 Uses only the standard library. Requires a token in GH_TOKEN (the Actions
 GITHUB_TOKEN works for public data; a classic PAT with `repo` + `read:user`
 also counts private contributions).
+
+Outputs:
+  README.md                      from TEMPLATE.md
+  assets/header-{light,dark}.svg name, stats and language bar
+  assets/stack-{light,dark}.svg  tech stack
+  assets/projects/*.svg          one card per project in profile.json
 """
 
 import json
 import os
 import sys
-import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
+from html import escape
 from pathlib import Path
 
 USERNAME = os.environ.get("GH_USERNAME", "irfanalimd")
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE = ROOT / "TEMPLATE.md"
 README = ROOT / "README.md"
+PROFILE = ROOT / "profile.json"
 ASSETS = ROOT / "assets"
 
 # Markup and notebook output inflate byte counts without saying much about
 # what someone actually writes, so leave them out of the language breakdown.
 IGNORED_LANGUAGES = {
-    "Jupyter Notebook", "HTML", "CSS", "SCSS", "Sass", "Less", "Stylus", "CMake", "Makefile", "Dockerfile",
+    "Jupyter Notebook", "HTML", "CSS", "SCSS", "Sass", "Less", "Stylus", "CMake", "Makefile", "Dockerfile", "Shell",
 }
 TOP_LANGUAGES = 6
-ACTIVE_PROJECTS = 5
+ACTIVE_DAYS = 21  # a project counts as "active" if pushed within this many days
+
+# GitHub's own light/dark palettes, so the cards sit naturally on the page.
+THEMES = {
+    "light": {"bg": "#ffffff", "border": "#d0d7de", "ink": "#1f2328", "muted": "#59636e", "faint": "#818b98",
+              "chip": "#f6f8fa", "active": "#1a7f37"},
+    "dark": {"bg": "#0d1117", "border": "#30363d", "ink": "#e6edf3", "muted": "#9198a1", "faint": "#7d8590",
+             "chip": "#161b22", "active": "#3fb950"},
+}
+FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
 
 
+# ---------------------------------------------------------------------------
+# GitHub data
+# ---------------------------------------------------------------------------
 def graphql(token, query, variables=None):
     body = json.dumps({"query": query, "variables": variables or {}}).encode()
     req = urllib.request.Request(
@@ -51,14 +70,15 @@ PROFILE_QUERY = """
 query($login: String!, $after: String) {
   user(login: $login) {
     createdAt
-    followers { totalCount }
     pullRequests { totalCount }
-    issues { totalCount }
     repositories(first: 100, after: $after, ownerAffiliations: OWNER, privacy: PUBLIC) {
       totalCount
       pageInfo { hasNextPage endCursor }
       nodes {
+        name
+        url
         isFork
+        pushedAt
         stargazerCount
         languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
           edges { size node { name color } }
@@ -72,28 +92,17 @@ query($login: String!, $after: String) {
 YEAR_QUERY = """
 query($login: String!, $from: DateTime!, $to: DateTime!) {
   user(login: $login) {
-    contributionsCollection(from: $from, to: $to) {
-      totalCommitContributions
-    }
+    contributionsCollection(from: $from, to: $to) { totalCommitContributions }
   }
 }
 """
 
 LAST_YEAR_QUERY = """
-query($login: String!, $from: DateTime!, $to: DateTime!, $max: Int!) {
+query($login: String!, $from: DateTime!, $to: DateTime!) {
   user(login: $login) {
     contributionsCollection(from: $from, to: $to) {
       totalCommitContributions
-      totalPullRequestContributions
-      totalIssueContributions
-      contributionCalendar {
-        totalContributions
-        weeks { contributionDays { date contributionCount } }
-      }
-      commitContributionsByRepository(maxRepositories: $max) {
-        repository { name url description isPrivate isFork }
-        contributions { totalCount }
-      }
+      contributionCalendar { weeks { contributionDays { date contributionCount } } }
     }
   }
 }
@@ -127,16 +136,8 @@ def fetch_stats(token):
         data = graphql(token, YEAR_QUERY, {"login": USERNAME, "from": iso(start), "to": iso(end)})
         total_commits += data["user"]["contributionsCollection"]["totalCommitContributions"]
 
-    data = graphql(
-        token,
-        LAST_YEAR_QUERY,
-        {
-            "login": USERNAME,
-            "from": iso(now - timedelta(days=365)),
-            "to": iso(now),
-            "max": ACTIVE_PROJECTS * 3,
-        },
-    )
+    data = graphql(token, LAST_YEAR_QUERY,
+                   {"login": USERNAME, "from": iso(now - timedelta(days=365)), "to": iso(now)})
     last_year = data["user"]["contributionsCollection"]
 
     languages = {}
@@ -162,166 +163,267 @@ def fetch_stats(token):
             break
         current_streak += 1
 
-    active = [
-        {
-            "name": c["repository"]["name"],
-            "url": c["repository"]["url"],
-            "description": c["repository"]["description"] or "",
-            "commits": c["contributions"]["totalCount"],
-        }
-        for c in last_year["commitContributionsByRepository"]
-        if not c["repository"]["isPrivate"] and not c["repository"]["isFork"]
-    ][:ACTIVE_PROJECTS]
-
     return {
         "now": now,
-        "years_on_github": now.year - created.year - ((now.month, now.day) < (created.month, created.day)),
+        "since": created.year,
         "public_repos": profile["repositories"]["totalCount"],
-        "stars": sum(r["stargazerCount"] for r in repos if not r["isFork"]),
-        "followers": profile["followers"]["totalCount"],
         "total_prs": profile["pullRequests"]["totalCount"],
-        "total_issues": profile["issues"]["totalCount"],
         "total_commits": total_commits,
         "year_commits": last_year["totalCommitContributions"],
-        "year_prs": last_year["totalPullRequestContributions"],
-        "year_contributions": last_year["contributionCalendar"]["totalContributions"],
         "current_streak": current_streak,
         "longest_streak": longest_streak,
         "languages": languages,
-        "active": active,
-        "since": created.year,
+        "repos": {r["name"]: r for r in repos},
     }
 
 
-def badge(label, message, color, label_color="555", style="flat-square"):
-    q = urllib.parse.quote
-    return (
-        f"https://img.shields.io/static/v1?style={style}"
-        f"&label={q(label)}&message={q(message)}&color={q(color.lstrip('#'))}"
-        f"&labelColor={q(label_color.lstrip('#'))}"
-    )
+# ---------------------------------------------------------------------------
+# SVG helpers
+# ---------------------------------------------------------------------------
+def text_width(s, size, bold=False):
+    """Rough rendered width of `s` in a system sans. Errs a little wide."""
+    w = 0.0
+    for ch in s:
+        if ch == " ":
+            w += 0.28
+        elif ch in "iljI.,:;'|!()[]/":
+            w += 0.30
+        elif ch in "frt-*":
+            w += 0.40
+        elif ch in "mwMW@":
+            w += 0.88
+        elif ch.isupper():
+            w += 0.68
+        elif ch.isdigit():
+            w += 0.58
+        else:
+            w += 0.55
+    return w * size * (1.06 if bold else 1.0)
 
 
-CARD_THEMES = {
-    # GitHub's own light/dark palettes, so the card sits naturally on the page
-    "light": {"bg": "#ffffff", "border": "#d0d7de", "ink": "#1f2328", "muted": "#59636e"},
-    "dark": {"bg": "#0d1117", "border": "#30363d", "ink": "#e6edf3", "muted": "#9198a1"},
-}
-FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
+def wrap(text, size, max_width, max_lines):
+    lines, line = [], ""
+    for word in text.split():
+        trial = f"{line} {word}".strip()
+        if text_width(trial, size) <= max_width or not line:
+            line = trial
+        else:
+            lines.append(line)
+            line = word
+    if line:
+        lines.append(line)
+    if len(lines) > max_lines:
+        print(f"warning: tagline too long, truncating: {text!r}", file=sys.stderr)
+        lines = lines[:max_lines]
+        while text_width(lines[-1] + "…", size) > max_width:
+            lines[-1] = lines[-1].rsplit(" ", 1)[0]
+        lines[-1] = lines[-1].rstrip(".,;:") + "…"
+    return lines
 
 
-def card_stats(s):
-    streak_label = "Current streak"
+def svg_open(w, h, t, label):
+    return [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
+        f'font-family="{FONT}" role="img" aria-label="{escape(label)}">',
+        f'<rect x="0.5" y="0.5" width="{w - 1}" height="{h - 1}" rx="12" fill="{t["bg"]}" stroke="{t["border"]}"/>',
+    ]
+
+
+def lang_color(color, theme):
+    color = color or "#8b949e"
+    if theme == "dark":  # very dark linguist colours (e.g. C) vanish on the dark page
+        r, g, b = (int(color.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4))
+        if 0.2126 * r + 0.7152 * g + 0.0722 * b < 90:
+            return "#8b949e"
+    return color
+
+
+# ---------------------------------------------------------------------------
+# Cards
+# ---------------------------------------------------------------------------
+def render_header(s, cfg, theme):
+    t = THEMES[theme]
+    W, H, pad = 840, 252, 28
+    out = svg_open(W, H, t, f"{cfg['name']}: GitHub stats")
+    out.append(f'<text x="{pad}" y="52" fill="{t["ink"]}" font-size="26" font-weight="600" '
+               f'letter-spacing="-0.4">{escape(cfg["name"])}</text>')
+    out.append(f'<text x="{pad}" y="78" fill="{t["muted"]}" font-size="14">{escape(cfg["tagline"])}</text>')
+    out.append(f'<line x1="{pad}" y1="102" x2="{W - pad}" y2="102" stroke="{t["border"]}"/>')
+
+    streak_label = "Day streak"
     if s["longest_streak"] > s["current_streak"]:
         streak_label += f" · best {s['longest_streak']}"
-    return [
-        (f"{s['total_commits']:,}", "", "Commits"),
-        (f"{s['year_commits']:,}", "", "In the past year"),
-        (f"{s['current_streak']:,}", " days", streak_label),
-        (f"{s['total_prs']:,}", "", "Pull requests"),
-        (f"{s['public_repos']:,}", "", "Public repos"),
+    stats = [
+        (f"{s['total_commits']:,}", "Commits"),
+        (f"{s['year_commits']:,}", "In the past year"),
+        (f"{s['current_streak']:,}", streak_label),
+        (f"{s['total_prs']:,}", "Pull requests"),
+        (f"{s['public_repos']:,}", "Public repos"),
     ]
-
-
-def render_card(s, theme):
-    t = CARD_THEMES[theme]
-    W, H, pad = 840, 164, 28
-    stats = card_stats(s)
     col = (W - 2 * pad) / len(stats)
-    out = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
-        f'font-family="{FONT}" role="img" aria-label="GitHub stats">',
-        f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="12" fill="{t["bg"]}" stroke="{t["border"]}"/>',
-    ]
-    for i, (value, suffix, label) in enumerate(stats):
-        x = pad + i * col + (0 if i == 0 else 24)
+    for i, (value, label) in enumerate(stats):
+        x = pad + i * col + (0 if i == 0 else 22)
         if i:
-            sx = pad + i * col
-            out.append(f'<line x1="{sx:.1f}" y1="32" x2="{sx:.1f}" y2="94" stroke="{t["border"]}"/>')
-        out.append(
-            f'<text x="{x:.1f}" y="68" fill="{t["ink"]}" font-size="30" font-weight="600" letter-spacing="-0.5">'
-            f'{value}<tspan fill="{t["muted"]}" font-size="15" font-weight="500" letter-spacing="0">{suffix}</tspan></text>'
-        )
-        out.append(f'<text x="{x:.1f}" y="90" fill="{t["muted"]}" font-size="13">{label}</text>')
+            out.append(f'<line x1="{pad + i * col:.1f}" y1="124" x2="{pad + i * col:.1f}" y2="170" '
+                       f'stroke="{t["border"]}"/>')
+        out.append(f'<text x="{x:.1f}" y="150" fill="{t["ink"]}" font-size="24" font-weight="600" '
+                   f'letter-spacing="-0.3">{value}</text>')
+        out.append(f'<text x="{x:.1f}" y="170" fill="{t["muted"]}" font-size="12.5">{escape(label)}</text>')
 
-    out.append(f'<line x1="{pad}" y1="118" x2="{W - pad}" y2="118" stroke="{t["border"]}"/>')
-    out.append(f'<text x="{pad}" y="142" fill="{t["muted"]}" font-size="12">On GitHub since {s["since"]}</text>')
-    out.append(
-        f'<text x="{W - pad}" y="142" fill="{t["muted"]}" font-size="12" text-anchor="end">'
-        f'Updated {s["now"].strftime("%b %-d, %Y")}</text>'
-    )
+    # language bar: one rounded track, segments separated by 2px of background
+    langs = sorted(s["languages"].items(), key=lambda kv: kv[1]["size"], reverse=True)[:TOP_LANGUAGES]
+    total = sum(v["size"] for _, v in langs) or 1
+    bar_y, bar_h, x = 196, 8, float(pad)
+    span = W - 2 * pad - 2 * (len(langs) - 1)
+    out.append(f'<clipPath id="bar"><rect x="{pad}" y="{bar_y}" width="{W - 2 * pad}" height="{bar_h}" rx="4"/></clipPath>')
+    out.append('<g clip-path="url(#bar)">')
+    for name, info in langs:
+        w = max(3.0, info["size"] / total * span)
+        out.append(f'<rect x="{x:.1f}" y="{bar_y}" width="{w:.1f}" height="{bar_h}" '
+                   f'fill="{lang_color(info["color"], theme)}"><title>{escape(name)}</title></rect>')
+        x += w + 2
+    out.append("</g>")
+    x = float(pad)
+    for name, info in langs:
+        share = info["size"] / total
+        pct = f"{share * 100:.0f}%" if share >= 0.01 else "<1%"
+        out.append(f'<circle cx="{x + 4:.1f}" cy="226" r="4" fill="{lang_color(info["color"], theme)}"/>')
+        out.append(f'<text x="{x + 14:.1f}" y="230" font-size="12" fill="{t["ink"]}">{escape(name)}'
+                   f'<tspan fill="{t["faint"]}"> {escape(pct)}</tspan></text>')
+        x += 14 + text_width(f"{name} {pct}", 12) + 18
+    out.append(f'<text x="{W - pad}" y="230" font-size="12" fill="{t["faint"]}" text-anchor="end">'
+               f'Since {s["since"]} · updated {s["now"].strftime("%b %-d, %Y")}</text>')
     out.append("</svg>")
     return "\n".join(out)
 
 
-def stats_alt(s):
-    return (f"{s['total_commits']:,} commits, {s['year_commits']:,} in the past year, "
-            f"{s['current_streak']}-day streak, {s['total_prs']:,} pull requests, {s['public_repos']:,} public repos")
+def render_project(item, repo, s, theme):
+    t = THEMES[theme]
+    W, H, px = 410, 124, 20
+    out = svg_open(W, H, t, f"{item['name']}: {item['tagline']}")
+    out.append(f'<text x="{px}" y="36" fill="{t["ink"]}" font-size="15" font-weight="600">{escape(item["name"])}</text>')
+    stars = (repo or {}).get("stargazerCount", 0)
+    if stars:
+        out.append(f'<text x="{W - px}" y="36" fill="{t["muted"]}" font-size="12" text-anchor="end">★ {stars}</text>')
+    for i, line in enumerate(wrap(item["tagline"], 13, W - 2 * px, 2)):
+        out.append(f'<text x="{px}" y="{60 + i * 19}" fill="{t["muted"]}" font-size="13">{escape(line)}</text>')
+    out.append(f'<text x="{px}" y="{H - 20}" fill="{t["faint"]}" font-size="12">'
+               f'{escape("  ·  ".join(item.get("tags", [])))}</text>')
+    pushed = (repo or {}).get("pushedAt")
+    if pushed:
+        age = s["now"] - datetime.fromisoformat(pushed.replace("Z", "+00:00"))
+        if age.days <= ACTIVE_DAYS:
+            out.append(f'<circle cx="{W - px - 46}" cy="{H - 24}" r="3.5" fill="{t["active"]}"/>')
+            out.append(f'<text x="{W - px}" y="{H - 20}" fill="{t["muted"]}" font-size="12" '
+                       f'text-anchor="end">Active</text>')
+    out.append("</svg>")
+    return "\n".join(out)
 
 
-def render_languages(languages):
-    total = sum(v["size"] for v in languages.values())
-    if not total:
-        return "_No language data yet._"
-    top = sorted(languages.items(), key=lambda kv: kv[1]["size"], reverse=True)[:TOP_LANGUAGES]
-    rows = ["| Language | Share |", "|:--|:--|"]
-    for name, info in top:
-        pct = info["size"] / total * 100
-        filled = max(1, round(pct / 5))
-        bar = "█" * filled + "░" * (20 - filled)
-        color = info["color"] or "#888888"
-        rows.append(f"| ![{name}]({badge('⠀', name, '555', color)}) | `{bar}` {pct:.1f}% |")
-    return "\n".join(rows)
+def render_stack(cfg, theme):
+    t = THEMES[theme]
+    W, pad, label_w, chip_h, gap, size = 840, 28, 150, 28, 8, 12.5
+    rows, y = [], 28
+    for group in cfg["stack"]:
+        x, row, first = pad + label_w, [], True
+        for item in group["items"]:
+            w = text_width(item, size) + 26
+            if x + w > W - pad and row:  # wrap onto another line within the same group
+                rows.append((group["label"] if first else "", y, row))
+                first = False
+                y += chip_h + gap
+                x, row = pad + label_w, []
+            row.append((item, x, w))
+            x += w + gap
+        rows.append((group["label"] if first else "", y, row))
+        y += chip_h + 14
+    H = y + 14
+    out = svg_open(W, H, t, "Tech stack: " + "; ".join(
+        f"{g['label']}: {', '.join(g['items'])}" for g in cfg["stack"]))
+    for label, ry, row in rows:
+        if label:
+            out.append(f'<text x="{pad}" y="{ry + 18.5}" fill="{t["muted"]}" font-size="13">{escape(label)}</text>')
+        for item, cx, w in row:
+            out.append(f'<rect x="{cx:.1f}" y="{ry}" width="{w:.1f}" height="{chip_h}" rx="{chip_h / 2}" '
+                       f'fill="{t["chip"]}" stroke="{t["border"]}"/>')
+            out.append(f'<text x="{cx + w / 2:.1f}" y="{ry + 18.5}" fill="{t["ink"]}" font-size="{size}" '
+                       f'text-anchor="middle">{escape(item)}</text>')
+    out.append("</svg>")
+    return "\n".join(out)
 
 
-def render_active(active):
-    if not active:
-        return "_Nothing public yet this year._"
-    lines = []
-    for repo in active:
-        desc = repo["description"]
-        if len(desc) > 90:
-            desc = desc[:87].rsplit(" ", 1)[0].rstrip(".,;:") + "…"
-        desc = f" — {desc}" if desc else ""
-        lines.append(f"- [**{repo['name']}**]({repo['url']}) · `{repo['commits']:,} commits`{desc}")
-    return "\n".join(lines)
+# ---------------------------------------------------------------------------
+# Markdown
+# ---------------------------------------------------------------------------
+def picture(base, alt, width="100%", href=None):
+    img = (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{base}-dark.svg">'
+           f'<img src="{base}-light.svg" width="{width}" alt="{escape(alt)}"></picture>')
+    return f'<a href="{href}">{img}</a>' if href else img
 
 
-def render(template, s):
-    values = {
-        "TOTAL_COMMITS": f"{s['total_commits']:,}",
-        "YEAR_COMMITS": f"{s['year_commits']:,}",
-        "YEAR_CONTRIBUTIONS": f"{s['year_contributions']:,}",
-        "YEAR_PRS": f"{s['year_prs']:,}",
-        "TOTAL_PRS": f"{s['total_prs']:,}",
-        "TOTAL_ISSUES": f"{s['total_issues']:,}",
-        "PUBLIC_REPOS": f"{s['public_repos']:,}",
-        "STARS": f"{s['stars']:,}",
-        "FOLLOWERS": f"{s['followers']:,}",
-        "CURRENT_STREAK": f"{s['current_streak']:,}",
-        "LONGEST_STREAK": f"{s['longest_streak']:,}",
-        "YEARS_ON_GITHUB": str(s["years_on_github"]),
-        "LANGUAGES": render_languages(s["languages"]),
-        "ACTIVE_PROJECTS": render_active(s["active"]),
-        "UPDATED": s["now"].strftime("%d %b %Y"),
-        "STATS_ALT": stats_alt(s),
-    }
-    out = template
-    for key, value in values.items():
-        out = out.replace("{{" + key + "}}", value)
-    return out
+def render_projects(cfg, s):
+    blocks, listed = [], set()
+    for group in cfg["projects"]:
+        cards = []
+        for item in group["items"]:
+            listed.add(item["repo"])
+            repo = s["repos"].get(item["repo"])
+            url = (repo or {}).get("url") or f"https://github.com/{USERNAME}/{item['repo']}"
+            cards.append(picture(f"assets/projects/{item['repo']}", f"{item['name']}: {item['tagline']}",
+                                 width="49%", href=url))
+        # two cards per line, so the pair sits side by side however line breaks are rendered
+        rows = [" ".join(cards[i:i + 2]) for i in range(0, len(cards), 2)]
+        blocks.append(f"#### {group['group']}\n\n" + "\n".join(rows))
+    rest = [name for name, r in s["repos"].items()
+            if name not in listed and not r["isFork"] and name.lower() != USERNAME.lower()]
+    if rest:
+        blocks.append(f"<sub>Plus {len(rest)} smaller projects, coursework and experiments in "
+                      f'<a href="https://github.com/{USERNAME}?tab=repositories">my repositories</a>.</sub>')
+    return "\n\n".join(blocks)
+
+
+def header_alt(cfg, s):
+    return (f"{cfg['name']}. {cfg['tagline']}. {s['total_commits']:,} commits, {s['year_commits']:,} in the "
+            f"past year, {s['current_streak']}-day streak, {s['total_prs']:,} pull requests, "
+            f"{s['public_repos']:,} public repos.")
 
 
 def main():
     token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
     if not token:
         sys.exit("Set GH_TOKEN (e.g. `export GH_TOKEN=$(gh auth token)`).")
-    stats = fetch_stats(token)
-    README.write_text(render(TEMPLATE.read_text(), stats))
-    ASSETS.mkdir(exist_ok=True)
-    for theme in CARD_THEMES:
-        (ASSETS / f"stats-{theme}.svg").write_text(render_card(stats, theme))
-    print(f"README updated: {stats['total_commits']:,} total commits")
+    cfg = json.loads(PROFILE.read_text())
+    s = fetch_stats(token)
+
+    (ASSETS / "projects").mkdir(parents=True, exist_ok=True)
+    keep = set()
+    for theme in THEMES:
+        (ASSETS / f"header-{theme}.svg").write_text(render_header(s, cfg, theme))
+        (ASSETS / f"stack-{theme}.svg").write_text(render_stack(cfg, theme))
+        for group in cfg["projects"]:
+            for item in group["items"]:
+                path = ASSETS / "projects" / f"{item['repo']}-{theme}.svg"
+                path.write_text(render_project(item, s["repos"].get(item["repo"]), s, theme))
+                keep.add(path.name)
+    for stale in (ASSETS / "projects").glob("*.svg"):  # projects removed from profile.json
+        if stale.name not in keep:
+            stale.unlink()
+    for old in ("stats-light.svg", "stats-dark.svg"):  # previous design
+        (ASSETS / old).unlink(missing_ok=True)
+
+    links = " · ".join(f'<a href="{l["url"]}">{escape(l["label"])}</a>' for l in cfg.get("links", []))
+    values = {
+        "HEADER": picture("assets/header", header_alt(cfg, s)),
+        "LINKS": links,
+        "PROJECTS": render_projects(cfg, s),
+        "STACK": picture("assets/stack", "Tech stack"),
+        "UPDATED": s["now"].strftime("%d %b %Y"),
+    }
+    out = TEMPLATE.read_text()
+    for key, value in values.items():
+        out = out.replace("{{" + key + "}}", value)
+    README.write_text(out)
+    print(f"README updated: {s['total_commits']:,} total commits")
 
 
 if __name__ == "__main__":

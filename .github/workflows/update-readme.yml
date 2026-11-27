@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - TEMPLATE.md
+      - profile.json
       - scripts/**
       - .github/workflows/update-readme.yml
 
