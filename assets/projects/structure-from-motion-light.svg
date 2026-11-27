@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="410" height="74" viewBox="0 0 410 74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="Structure from Motion: 3D point clouds from unordered photos">
+<rect x="0.5" y="0.5" width="409" height="73" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<rect x="14" y="14" width="46" height="46" rx="12" fill="#0969da" fill-opacity="0.1"/>
+<g transform="translate(21 21) scale(1.3333333333333333)"><path d="M3 9.5h4v5H3z M7 10.5l4-2.5v8l-4-2.5" fill="none" stroke="#0969da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="6" r="1.1" fill="#0969da"/><circle cx="18.5" cy="9.5" r="1.1" fill="#0969da"/><circle cx="16" cy="13" r="1.1" fill="#0969da"/><circle cx="20.5" cy="14.5" r="1.1" fill="#0969da"/><circle cx="14.5" cy="18" r="1.1" fill="#0969da"/><circle cx="19" cy="19.5" r="1.1" fill="#0969da"/></g>
+<text x="74" y="33" fill="#1f2328" font-size="14.5" font-weight="600">Structure from Motion</text>
+<text x="394" y="32" fill="#0969da" font-size="9.5" font-weight="600" letter-spacing="0.9" text-anchor="end">ROBOTICS</text>
+<text x="74" y="53" fill="#59636e" font-size="12.5">3D point clouds from unordered photos</text>
+</svg>
