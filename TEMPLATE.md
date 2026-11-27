@@ -2,17 +2,10 @@
 
 ### 📊 By the numbers
 
-<div align="center">
-
-| 🔥 Total commits | 📆 Commits · last 365 days | ⚡ Current streak | 🏆 Longest streak (last year) |
-|:--:|:--:|:--:|:--:|
-| **{{TOTAL_COMMITS}}** | **{{YEAR_COMMITS}}** | **{{CURRENT_STREAK}}** days | **{{LONGEST_STREAK}}** days |
-
-| 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
-|:--:|:--:|:--:|:--:|:--:|
-| **{{PUBLIC_REPOS}}** | **{{TOTAL_PRS}}** | **{{TOTAL_ISSUES}}** | **{{STARS}}** | **{{YEARS_ON_GITHUB}}** years |
-
-</div>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg">
+  <img src="assets/stats-light.svg" alt="{{STATS_ALT}}" width="100%">
+</picture>
 
 ### 🛠️ Tech stack
 

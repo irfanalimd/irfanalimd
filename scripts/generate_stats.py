@@ -18,6 +18,7 @@ USERNAME = os.environ.get("GH_USERNAME", "irfanalimd")
 ROOT = Path(__file__).resolve().parent.parent
 TEMPLATE = ROOT / "TEMPLATE.md"
 README = ROOT / "README.md"
+ASSETS = ROOT / "assets"
 
 # Markup and notebook output inflate byte counts without saying much about
 # what someone actually writes, so leave them out of the language breakdown.
@@ -188,6 +189,7 @@ def fetch_stats(token):
         "longest_streak": longest_streak,
         "languages": languages,
         "active": active,
+        "since": created.year,
     }
 
 
@@ -198,6 +200,63 @@ def badge(label, message, color, label_color="555", style="flat-square"):
         f"&label={q(label)}&message={q(message)}&color={q(color.lstrip('#'))}"
         f"&labelColor={q(label_color.lstrip('#'))}"
     )
+
+
+CARD_THEMES = {
+    # GitHub's own light/dark palettes, so the card sits naturally on the page
+    "light": {"bg": "#ffffff", "border": "#d0d7de", "ink": "#1f2328", "muted": "#59636e"},
+    "dark": {"bg": "#0d1117", "border": "#30363d", "ink": "#e6edf3", "muted": "#9198a1"},
+}
+FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
+
+
+def card_stats(s):
+    streak_label = "Current streak"
+    if s["longest_streak"] > s["current_streak"]:
+        streak_label += f" · best {s['longest_streak']}"
+    return [
+        (f"{s['total_commits']:,}", "", "Commits"),
+        (f"{s['year_commits']:,}", "", "In the past year"),
+        (f"{s['current_streak']:,}", " days", streak_label),
+        (f"{s['total_prs']:,}", "", "Pull requests"),
+        (f"{s['public_repos']:,}", "", "Public repos"),
+    ]
+
+
+def render_card(s, theme):
+    t = CARD_THEMES[theme]
+    W, H, pad = 840, 164, 28
+    stats = card_stats(s)
+    col = (W - 2 * pad) / len(stats)
+    out = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
+        f'font-family="{FONT}" role="img" aria-label="GitHub stats">',
+        f'<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="12" fill="{t["bg"]}" stroke="{t["border"]}"/>',
+    ]
+    for i, (value, suffix, label) in enumerate(stats):
+        x = pad + i * col + (0 if i == 0 else 24)
+        if i:
+            sx = pad + i * col
+            out.append(f'<line x1="{sx:.1f}" y1="32" x2="{sx:.1f}" y2="94" stroke="{t["border"]}"/>')
+        out.append(
+            f'<text x="{x:.1f}" y="68" fill="{t["ink"]}" font-size="30" font-weight="600" letter-spacing="-0.5">'
+            f'{value}<tspan fill="{t["muted"]}" font-size="15" font-weight="500" letter-spacing="0">{suffix}</tspan></text>'
+        )
+        out.append(f'<text x="{x:.1f}" y="90" fill="{t["muted"]}" font-size="13">{label}</text>')
+
+    out.append(f'<line x1="{pad}" y1="118" x2="{W - pad}" y2="118" stroke="{t["border"]}"/>')
+    out.append(f'<text x="{pad}" y="142" fill="{t["muted"]}" font-size="12">On GitHub since {s["since"]}</text>')
+    out.append(
+        f'<text x="{W - pad}" y="142" fill="{t["muted"]}" font-size="12" text-anchor="end">'
+        f'Updated {s["now"].strftime("%b %-d, %Y")}</text>'
+    )
+    out.append("</svg>")
+    return "\n".join(out)
+
+
+def stats_alt(s):
+    return (f"{s['total_commits']:,} commits, {s['year_commits']:,} in the past year, "
+            f"{s['current_streak']}-day streak, {s['total_prs']:,} pull requests, {s['public_repos']:,} public repos")
 
 
 def render_languages(languages):
@@ -245,6 +304,7 @@ def render(template, s):
         "LANGUAGES": render_languages(s["languages"]),
         "ACTIVE_PROJECTS": render_active(s["active"]),
         "UPDATED": s["now"].strftime("%d %b %Y"),
+        "STATS_ALT": stats_alt(s),
     }
     out = template
     for key, value in values.items():
@@ -258,6 +318,9 @@ def main():
         sys.exit("Set GH_TOKEN (e.g. `export GH_TOKEN=$(gh auth token)`).")
     stats = fetch_stats(token)
     README.write_text(render(TEMPLATE.read_text(), stats))
+    ASSETS.mkdir(exist_ok=True)
+    for theme in CARD_THEMES:
+        (ASSETS / f"stats-{theme}.svg").write_text(render_card(stats, theme))
     print(f"README updated: {stats['total_commits']:,} total commits")
 
 
