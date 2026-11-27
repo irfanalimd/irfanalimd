@@ -1,86 +1,229 @@
 {
   "name": "Mohammed Irfan Ali",
   "tagline": "Robotics, perception and vision-language models · Boston",
-  "links": [
-    { "label": "irfanali.me", "url": "https://irfanali.me" },
-    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/irfanalimd/" },
-    { "label": "sites.irfanali.me", "url": "https://sites.irfanali.me" }
-  ],
   "projects": [
     {
       "group": "Robotics & perception",
       "items": [
-        { "repo": "nanovla", "name": "nanoVLA",
+        {
+          "repo": "nanovla",
+          "name": "nanoVLA",
           "tagline": "A small vision-language-action model trained on the LIBERO manipulation benchmark. In progress.",
-          "tags": ["Python", "LeRobot", "Robot learning"] },
-        { "repo": "6D-pose-tracking-system", "name": "6D Pose Tracking",
+          "tags": [
+            "Python",
+            "LeRobot",
+            "Robot learning"
+          ]
+        },
+        {
+          "repo": "6D-pose-tracking-system",
+          "name": "6D Pose Tracking",
           "tagline": "Real-time 6D pose tracking of multiple household objects from a single RGB camera.",
-          "tags": ["Perception", "Pose estimation"] },
-        { "repo": "ORB-SLAM-3-using-ROS", "name": "ORB-SLAM3 on ROS",
+          "tags": [
+            "Perception",
+            "Pose estimation"
+          ]
+        },
+        {
+          "repo": "ORB-SLAM-3-using-ROS",
+          "name": "ORB-SLAM3 on ROS",
           "tagline": "Visual SLAM with ORB-SLAM3 integrated into a ROS pipeline.",
-          "tags": ["ROS", "Visual SLAM"] },
-        { "repo": "AM-RRT-motion-planning-algorithm", "name": "AM-RRT* Motion Planning",
+          "tags": [
+            "ROS",
+            "Visual SLAM"
+          ]
+        },
+        {
+          "repo": "AM-RRT-motion-planning-algorithm",
+          "name": "AM-RRT* Motion Planning",
           "tagline": "Sampling-based AM-RRT* planner, implemented and tested in Gazebo.",
-          "tags": ["Gazebo", "Motion planning"] },
-        { "repo": "robust-navigation-using-GPS-IMU", "name": "GPS + IMU Navigation",
+          "tags": [
+            "Gazebo",
+            "Motion planning"
+          ]
+        },
+        {
+          "repo": "robust-navigation-using-GPS-IMU",
+          "name": "GPS + IMU Navigation",
           "tagline": "Sensor fusion for state estimation: ROS drivers, Allan variance, complementary filter, dead reckoning.",
-          "tags": ["ROS", "Sensor fusion"] },
-        { "repo": "structure-from-motion", "name": "Structure from Motion",
+          "tags": [
+            "ROS",
+            "Sensor fusion"
+          ]
+        },
+        {
+          "repo": "structure-from-motion",
+          "name": "Structure from Motion",
           "tagline": "3D point-cloud reconstruction from unordered sets of images.",
-          "tags": ["3D vision", "Point clouds"] },
-        { "repo": "Image-Registration-and-Mosaicking", "name": "Underwater Mosaicking",
+          "tags": [
+            "3D vision",
+            "Point clouds"
+          ]
+        },
+        {
+          "repo": "Image-Registration-and-Mosaicking",
+          "name": "Underwater Mosaicking",
           "tagline": "Robust image registration and mosaicking for underwater archaeology.",
-          "tags": ["Image registration", "Computer vision"] },
-        { "repo": "qf-cuda-toolkit", "name": "qf-cuda-toolkit",
+          "tags": [
+            "Image registration",
+            "Computer vision"
+          ]
+        },
+        {
+          "repo": "qf-cuda-toolkit",
+          "name": "qf-cuda-toolkit",
           "tagline": "GPU image-processing library with chainable filters and GPU-vs-CPU benchmarks.",
-          "tags": ["CUDA", "C++"] }
+          "tags": [
+            "CUDA",
+            "C++"
+          ]
+        }
       ]
     },
     {
       "group": "Vision & language models",
       "items": [
-        { "repo": "VLM-Bias-Detection-with-Chain-of-Thought-Reasoning", "name": "VLM Bias Detection",
+        {
+          "repo": "VLM-Bias-Detection-with-Chain-of-Thought-Reasoning",
+          "name": "VLM Bias Detection",
           "tagline": "Detects social bias in vision-language models and explains it with chain-of-thought reasoning.",
-          "tags": ["LLaVA", "CLIP", "LoRA"] },
-        { "repo": "Image-Captioning-with-Vision-Transformer-and-GPT-2-", "name": "ViT + GPT-2 Captioning",
+          "tags": [
+            "LLaVA",
+            "CLIP",
+            "LoRA"
+          ]
+        },
+        {
+          "repo": "Image-Captioning-with-Vision-Transformer-and-GPT-2-",
+          "name": "ViT + GPT-2 Captioning",
           "tagline": "Image captioning with a Vision Transformer encoder and a GPT-2 decoder, trained on MS COCO.",
-          "tags": ["PyTorch", "Transformers"] },
-        { "repo": "Visual-Agent-for-Explainable-Reasoning", "name": "Explainable Visual Agent",
+          "tags": [
+            "PyTorch",
+            "Transformers"
+          ]
+        },
+        {
+          "repo": "Visual-Agent-for-Explainable-Reasoning",
+          "name": "Explainable Visual Agent",
           "tagline": "Fills in web forms by itself and writes a readable explanation for every action it takes.",
-          "tags": ["Playwright", "OpenCV"] },
-        { "repo": "ViT-Attention-FineGrained-Classification", "name": "Fine-grained ViT",
+          "tags": [
+            "Playwright",
+            "OpenCV"
+          ]
+        },
+        {
+          "repo": "ViT-Attention-FineGrained-Classification",
+          "name": "Fine-grained ViT",
           "tagline": "Vision Transformer with hierarchical attention for fine-grained bird classification.",
-          "tags": ["ViT", "CUB-200-2011"] }
+          "tags": [
+            "ViT",
+            "CUB-200-2011"
+          ]
+        }
       ]
     },
     {
       "group": "Tools & side projects",
       "items": [
-        { "repo": "weft", "name": "Weft",
+        {
+          "repo": "weft",
+          "name": "Weft",
           "tagline": "Offline-first collaborative Markdown editor. One Rust CRDT runs in the browser and on the server.",
-          "tags": ["Rust", "WebAssembly", "TypeScript"] },
-        { "repo": "chalk", "name": "chalk",
+          "tags": [
+            "Rust",
+            "WebAssembly",
+            "TypeScript"
+          ]
+        },
+        {
+          "repo": "chalk",
+          "name": "chalk",
           "tagline": "Claude Code plugin that turns a paper or blog post into a narrated, animated explainer video.",
-          "tags": ["Python", "Manim"] },
-        { "repo": "explainer", "name": "Explainer",
+          "tags": [
+            "Python",
+            "Manim"
+          ]
+        },
+        {
+          "repo": "explainer",
+          "name": "Explainer",
           "tagline": "Claude Code skill that teaches a CS concept by building a simulation you can rewind and break.",
-          "tags": ["JavaScript", "Claude Code"] },
-        { "repo": "robinhood-portfolio-dashboard", "name": "Portfolio Dashboard",
+          "tags": [
+            "JavaScript",
+            "Claude Code"
+          ]
+        },
+        {
+          "repo": "robinhood-portfolio-dashboard",
+          "name": "Portfolio Dashboard",
           "tagline": "Local dashboard for a Robinhood CSV: returns vs the S&P 500, drawdowns and allocation.",
-          "tags": ["Python", "ECharts"] },
-        { "repo": "watchqueue", "name": "WatchQueue",
+          "tags": [
+            "Python",
+            "ECharts"
+          ]
+        },
+        {
+          "repo": "watchqueue",
+          "name": "WatchQueue",
           "tagline": "Helps a group of friends decide what to watch, fairly, from a shared real-time queue.",
-          "tags": ["FastAPI", "MongoDB"] },
-        { "repo": "sites", "name": "sites",
+          "tags": [
+            "FastAPI",
+            "MongoDB"
+          ]
+        },
+        {
+          "repo": "sites",
+          "name": "sites",
           "tagline": "Where my single-file HTML pages live. Any AI tool can publish to it from one instruction.",
-          "tags": ["HTML", "Static site"] }
+          "tags": [
+            "HTML",
+            "Static site"
+          ]
+        }
       ]
     }
   ],
   "stack": [
-    { "label": "Languages", "items": ["Python", "C++", "CUDA", "C", "Rust", "TypeScript"] },
-    { "label": "Robotics", "items": ["ROS", "Gazebo", "ORB-SLAM3", "RTAB-Map", "PCL", "Eigen"] },
-    { "label": "Vision & ML", "items": ["PyTorch", "TensorFlow", "OpenCV", "YOLOv8", "Mask2Former"] },
-    { "label": "Hardware & infra", "items": ["Jetson Orin NX", "Intel RealSense", "Docker", "Linux"] }
+    {
+      "label": "Languages",
+      "items": [
+        "Python",
+        "C++",
+        "CUDA",
+        "C",
+        "Rust",
+        "TypeScript"
+      ]
+    },
+    {
+      "label": "Robotics",
+      "items": [
+        "ROS",
+        "Gazebo",
+        "ORB-SLAM3",
+        "RTAB-Map",
+        "PCL",
+        "Eigen"
+      ]
+    },
+    {
+      "label": "Vision & ML",
+      "items": [
+        "PyTorch",
+        "TensorFlow",
+        "OpenCV",
+        "YOLOv8",
+        "Mask2Former"
+      ]
+    },
+    {
+      "label": "Hardware & infra",
+      "items": [
+        "Jetson Orin NX",
+        "Intel RealSense",
+        "Docker",
+        "Linux"
+      ]
+    }
   ]
 }

@@ -9,11 +9,12 @@ Outputs:
   README.md                      from TEMPLATE.md
   assets/header-{light,dark}.svg name, stats and language bar
   assets/stack-{light,dark}.svg  tech stack
-  assets/projects/*.svg          one card per project in profile.json
 """
 
 import json
 import os
+import re
+import shutil
 import sys
 import urllib.request
 from datetime import datetime, timedelta, timezone
@@ -33,14 +34,13 @@ IGNORED_LANGUAGES = {
     "Jupyter Notebook", "HTML", "CSS", "SCSS", "Sass", "Less", "Stylus", "CMake", "Makefile", "Dockerfile", "Shell",
 }
 TOP_LANGUAGES = 6
-ACTIVE_DAYS = 21  # a project counts as "active" if pushed within this many days
 
 # GitHub's own light/dark palettes, so the cards sit naturally on the page.
 THEMES = {
     "light": {"bg": "#ffffff", "border": "#d0d7de", "ink": "#1f2328", "muted": "#59636e", "faint": "#818b98",
-              "chip": "#f6f8fa", "active": "#1a7f37"},
+              "chip": "#f6f8fa"},
     "dark": {"bg": "#0d1117", "border": "#30363d", "ink": "#e6edf3", "muted": "#9198a1", "faint": "#7d8590",
-             "chip": "#161b22", "active": "#3fb950"},
+             "chip": "#161b22"},
 }
 FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
 
@@ -297,29 +297,6 @@ def render_header(s, cfg, theme):
     return "\n".join(out)
 
 
-def render_project(item, repo, s, theme):
-    t = THEMES[theme]
-    W, H, px = 410, 124, 20
-    out = svg_open(W, H, t, f"{item['name']}: {item['tagline']}")
-    out.append(f'<text x="{px}" y="36" fill="{t["ink"]}" font-size="15" font-weight="600">{escape(item["name"])}</text>')
-    stars = (repo or {}).get("stargazerCount", 0)
-    if stars:
-        out.append(f'<text x="{W - px}" y="36" fill="{t["muted"]}" font-size="12" text-anchor="end">★ {stars}</text>')
-    for i, line in enumerate(wrap(item["tagline"], 13, W - 2 * px, 2)):
-        out.append(f'<text x="{px}" y="{60 + i * 19}" fill="{t["muted"]}" font-size="13">{escape(line)}</text>')
-    out.append(f'<text x="{px}" y="{H - 20}" fill="{t["faint"]}" font-size="12">'
-               f'{escape("  ·  ".join(item.get("tags", [])))}</text>')
-    pushed = (repo or {}).get("pushedAt")
-    if pushed:
-        age = s["now"] - datetime.fromisoformat(pushed.replace("Z", "+00:00"))
-        if age.days <= ACTIVE_DAYS:
-            out.append(f'<circle cx="{W - px - 46}" cy="{H - 24}" r="3.5" fill="{t["active"]}"/>')
-            out.append(f'<text x="{W - px}" y="{H - 20}" fill="{t["muted"]}" font-size="12" '
-                       f'text-anchor="end">Active</text>')
-    out.append("</svg>")
-    return "\n".join(out)
-
-
 def render_stack(cfg, theme):
     t = THEMES[theme]
     W, pad, label_w, chip_h, gap, size = 840, 28, 150, 28, 8, 12.5
@@ -355,30 +332,27 @@ def render_stack(cfg, theme):
 # ---------------------------------------------------------------------------
 # Markdown
 # ---------------------------------------------------------------------------
-def picture(base, alt, width="100%", href=None):
-    img = (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{base}-dark.svg">'
-           f'<img src="{base}-light.svg" width="{width}" alt="{escape(alt)}"></picture>')
-    return f'<a href="{href}">{img}</a>' if href else img
+def picture(base, alt):
+    return (f'<picture><source media="(prefers-color-scheme: dark)" srcset="{base}-dark.svg">'
+            f'<img src="{base}-light.svg" width="100%" alt="{escape(alt)}"></picture>')
+
+
+def md_text(text):
+    return re.sub(r"([*_\[\]`])", r"\\\1", text)
 
 
 def render_projects(cfg, s):
-    blocks, listed = [], set()
+    """One short paragraph per group: the group name, then its projects as plain links.
+    Each project's one-liner is the link's hover title."""
+    blocks = []
     for group in cfg["projects"]:
-        cards = []
+        links = []
         for item in group["items"]:
-            listed.add(item["repo"])
-            repo = s["repos"].get(item["repo"])
-            url = (repo or {}).get("url") or f"https://github.com/{USERNAME}/{item['repo']}"
-            cards.append(picture(f"assets/projects/{item['repo']}", f"{item['name']}: {item['tagline']}",
-                                 width="49%", href=url))
-        # two cards per line, so the pair sits side by side however line breaks are rendered
-        rows = [" ".join(cards[i:i + 2]) for i in range(0, len(cards), 2)]
-        blocks.append(f"#### {group['group']}\n\n" + "\n".join(rows))
-    rest = [name for name, r in s["repos"].items()
-            if name not in listed and not r["isFork"] and name.lower() != USERNAME.lower()]
-    if rest:
-        blocks.append(f"<sub>Plus {len(rest)} smaller projects, coursework and experiments in "
-                      f'<a href="https://github.com/{USERNAME}?tab=repositories">my repositories</a>.</sub>')
+            repo = s["repos"].get(item["repo"]) or {}
+            url = repo.get("url") or f"https://github.com/{USERNAME}/{item['repo']}"
+            title = item["tagline"].replace('"', "'")
+            links.append(f'[{md_text(item["name"])}]({url} "{title}")')
+        blocks.append(f"**{group['group']}**  \n" + " · ".join(links))
     return "\n\n".join(blocks)
 
 
@@ -395,26 +369,14 @@ def main():
     cfg = json.loads(PROFILE.read_text())
     s = fetch_stats(token)
 
-    (ASSETS / "projects").mkdir(parents=True, exist_ok=True)
-    keep = set()
+    ASSETS.mkdir(exist_ok=True)
     for theme in THEMES:
         (ASSETS / f"header-{theme}.svg").write_text(render_header(s, cfg, theme))
         (ASSETS / f"stack-{theme}.svg").write_text(render_stack(cfg, theme))
-        for group in cfg["projects"]:
-            for item in group["items"]:
-                path = ASSETS / "projects" / f"{item['repo']}-{theme}.svg"
-                path.write_text(render_project(item, s["repos"].get(item["repo"]), s, theme))
-                keep.add(path.name)
-    for stale in (ASSETS / "projects").glob("*.svg"):  # projects removed from profile.json
-        if stale.name not in keep:
-            stale.unlink()
-    for old in ("stats-light.svg", "stats-dark.svg"):  # previous design
-        (ASSETS / old).unlink(missing_ok=True)
+    shutil.rmtree(ASSETS / "projects", ignore_errors=True)  # previous design's project cards
 
-    links = " · ".join(f'<a href="{l["url"]}">{escape(l["label"])}</a>' for l in cfg.get("links", []))
     values = {
         "HEADER": picture("assets/header", header_alt(cfg, s)),
-        "LINKS": links,
         "PROJECTS": render_projects(cfg, s),
         "STACK": picture("assets/stack", "Tech stack"),
         "UPDATED": s["now"].strftime("%d %b %Y"),

@@ -2,8 +2,6 @@
 
 {{HEADER}}
 
-<p align="center"><sub>{{LINKS}}</sub></p>
-
 ### Projects
 
 {{PROJECTS}}
