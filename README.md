@@ -1,18 +1,11 @@
-<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 26 Nov 2026 -->
+<!-- Edit TEMPLATE.md, not README.md — README.md is regenerated daily by .github/workflows/update-readme.yml · last run 27 Nov 2026 -->
 
 ### 📊 By the numbers
 
-<div align="center">
-
-| 🔥 Total commits | 📆 Commits · last 365 days | ⚡ Current streak | 🏆 Longest streak (last year) |
-|:--:|:--:|:--:|:--:|
-| **762** | **608** | **43** days | **43** days |
-
-| 📦 Public repos | 🔀 Pull requests | 📝 Issues | ⭐ Stars | 🗓️ On GitHub |
-|:--:|:--:|:--:|:--:|:--:|
-| **49** | **44** | **0** | **8** | **7** years |
-
-</div>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/stats-dark.svg">
+  <img src="assets/stats-light.svg" alt="769 commits, 615 in the past year, 45-day streak, 44 pull requests, 50 public repos" width="100%">
+</picture>
 
 ### 🛠️ Tech stack
 
@@ -79,18 +72,18 @@ GPU-accelerated image-processing library written in CUDA and C++.<br/>
 ### 🚀 Most active this year
 
 - [**explainer**](https://github.com/irfanalimd/explainer) · `343 commits` — A Claude Code skill that explains computer-science concepts by running them…
-- [**sites**](https://github.com/irfanalimd/sites) · `153 commits` — Personal publishing portal for HTML artifacts
-- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `45 commits`
+- [**sites**](https://github.com/irfanalimd/sites) · `154 commits` — Personal publishing portal for HTML artifacts
+- [**irfanalimd**](https://github.com/irfanalimd/irfanalimd) · `47 commits`
 - [**pstack-ports**](https://github.com/irfanalimd/pstack-ports) · `25 commits` — poteto's pstack agent skills, ported from Cursor to Claude Code and Codex
-- [**weft**](https://github.com/irfanalimd/weft) · `15 commits` — Real-time, offline-first collaborative Markdown editor. Rust CRDT in WASM + Rust sync…
+- [**weft**](https://github.com/irfanalimd/weft) · `17 commits` — Real-time, offline-first collaborative Markdown editor. Rust CRDT in WASM + Rust sync…
 
 ### 🧬 Languages across my repos
 
 | Language | Share |
 |:--|:--|
-| ![Python](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Python&color=555&labelColor=3572A5) | `██████████████░░░░░░` 72.1% |
-| ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=JavaScript&color=555&labelColor=f1e05a) | `███░░░░░░░░░░░░░░░░░` 16.8% |
-| ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=TypeScript&color=555&labelColor=3178c6) | `█░░░░░░░░░░░░░░░░░░░` 6.1% |
+| ![Python](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Python&color=555&labelColor=3572A5) | `██████████████░░░░░░` 71.7% |
+| ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=JavaScript&color=555&labelColor=f1e05a) | `███░░░░░░░░░░░░░░░░░` 16.7% |
+| ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=TypeScript&color=555&labelColor=3178c6) | `█░░░░░░░░░░░░░░░░░░░` 6.4% |
 | ![C++](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=C%2B%2B&color=555&labelColor=f34b7d) | `█░░░░░░░░░░░░░░░░░░░` 2.2% |
-| ![Rust](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Rust&color=555&labelColor=dea584) | `█░░░░░░░░░░░░░░░░░░░` 1.6% |
+| ![Rust](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=Rust&color=555&labelColor=dea584) | `█░░░░░░░░░░░░░░░░░░░` 1.8% |
 | ![C](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&message=C&color=555&labelColor=555555) | `█░░░░░░░░░░░░░░░░░░░` 0.5% |

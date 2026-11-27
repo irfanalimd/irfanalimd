@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="164" viewBox="0 0 840 164" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="GitHub stats">
+<rect x="0.5" y="0.5" width="839" height="163" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<text x="28.0" y="68" fill="#1f2328" font-size="30" font-weight="600" letter-spacing="-0.5">769<tspan fill="#59636e" font-size="15" font-weight="500" letter-spacing="0"></tspan></text>
+<text x="28.0" y="90" fill="#59636e" font-size="13">Commits</text>
+<line x1="184.8" y1="32" x2="184.8" y2="94" stroke="#d0d7de"/>
+<text x="208.8" y="68" fill="#1f2328" font-size="30" font-weight="600" letter-spacing="-0.5">615<tspan fill="#59636e" font-size="15" font-weight="500" letter-spacing="0"></tspan></text>
+<text x="208.8" y="90" fill="#59636e" font-size="13">In the past year</text>
+<line x1="341.6" y1="32" x2="341.6" y2="94" stroke="#d0d7de"/>
+<text x="365.6" y="68" fill="#1f2328" font-size="30" font-weight="600" letter-spacing="-0.5">45<tspan fill="#59636e" font-size="15" font-weight="500" letter-spacing="0"> days</tspan></text>
+<text x="365.6" y="90" fill="#59636e" font-size="13">Current streak</text>
+<line x1="498.4" y1="32" x2="498.4" y2="94" stroke="#d0d7de"/>
+<text x="522.4" y="68" fill="#1f2328" font-size="30" font-weight="600" letter-spacing="-0.5">44<tspan fill="#59636e" font-size="15" font-weight="500" letter-spacing="0"></tspan></text>
+<text x="522.4" y="90" fill="#59636e" font-size="13">Pull requests</text>
+<line x1="655.2" y1="32" x2="655.2" y2="94" stroke="#d0d7de"/>
+<text x="679.2" y="68" fill="#1f2328" font-size="30" font-weight="600" letter-spacing="-0.5">50<tspan fill="#59636e" font-size="15" font-weight="500" letter-spacing="0"></tspan></text>
+<text x="679.2" y="90" fill="#59636e" font-size="13">Public repos</text>
+<line x1="28" y1="118" x2="812" y2="118" stroke="#d0d7de"/>
+<text x="28" y="142" fill="#59636e" font-size="12">On GitHub since 2019</text>
+<text x="812" y="142" fill="#59636e" font-size="12" text-anchor="end">Updated Nov 27, 2026</text>
+</svg>
