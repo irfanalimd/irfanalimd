@@ -9,11 +9,11 @@ Outputs:
   README.md                      from TEMPLATE.md
   assets/header-{light,dark}.svg stats and language bar
   assets/stack-{light,dark}.svg  tech stack
+  assets/projects/*.svg          one row per project in profile.json
 """
 
 import json
 import os
-import re
 import shutil
 import sys
 import urllib.request
@@ -42,6 +42,37 @@ THEMES = {
     "dark": {"bg": "#0d1117", "border": "#30363d", "ink": "#e6edf3", "muted": "#9198a1", "faint": "#7d8590",
              "chip": "#161b22"},
 }
+# Category accents (GitHub Primer blue / purple / orange), light and dark steps.
+ACCENTS = {
+    "blue": {"light": "#0969da", "dark": "#4493f8"},
+    "purple": {"light": "#8250df", "dark": "#ab7df8"},
+    "orange": {"light": "#bc4c00", "dark": "#f0883e"},
+}
+
+# One hand-drawn 24x24 line icon per project: strokes inherit the accent colour,
+# "dots" are small filled circles (x, y, r).
+ICONS = {
+    "arm":     {"d": "M3 21h11 M5.5 21v-2.5h6V21 M8.5 18.5L11 8.5 M11 8.5l8 2.5 M19 11l1.2-4 M19 11l3.2 2.4",
+                "dots": [(8.5, 18.5, 1.6), (11, 8.5, 1.6)]},
+    "axes":    {"d": "M8 16h12 M8 16V4 M8 16l-5 5 M18 14l2 2-2 2 M6 6l2-2 2 2", "dots": [(8, 16, 1.5)]},
+    "slam":    {"d": "M3 19c3-1 4-6 8-7s6-6 10-8",
+                "dots": [(6, 8, 1.1), (15, 17, 1.1), (18.5, 13, 1.1), (11, 5, 1.1), (20, 19, 1.1), (3, 12, 1.1)]},
+    "tree":    {"d": "M4 20l5-5 M9 15l2-6 M9 15l6 1 M11 9l-4-4 M11 9l6-3 M15 16l5-3 M15 16l1 5",
+                "dots": [(20, 4, 1.7), (4, 20, 1.4)]},
+    "sfm":     {"d": "M3 9.5h4v5H3z M7 10.5l4-2.5v8l-4-2.5",
+                "dots": [(15, 6, 1.1), (18.5, 9.5, 1.1), (16, 13, 1.1), (20.5, 14.5, 1.1), (14.5, 18, 1.1), (19, 19.5, 1.1)]},
+    "grid":    {"d": "M4 4h4.5v4.5H4z M9.75 4h4.5v4.5h-4.5z M15.5 4H20v4.5h-4.5z M4 9.75h4.5v4.5H4z "
+                     "M15.5 9.75H20v4.5h-4.5z M4 15.5h4.5V20H4z M9.75 15.5h4.5V20h-4.5z M15.5 15.5H20V20h-4.5z",
+                "fill": "M9.75 9.75h4.5v4.5h-4.5z"},
+    "scale":   {"d": "M12 4v16 M7.5 20h9 M5 7.5h14 M5 7.5l-2.5 6h5z M19 7.5l-2.5 6h5z", "dots": [(12, 4, 1.3)]},
+    "caption": {"d": "M3 4h13v10H3z M5 12l3.5-3.5 2.5 2.5 2-2 2 2 M3 18h18 M3 21h11", "dots": [(12.5, 7, 1.2)]},
+    "weave":   {"d": "M2.5 8c3.2 0 3.2 4 6.4 4s3.2-4 6.4-4 3.2 4 6.4 4 M2.5 16c3.2 0 3.2-4 6.4-4s3.2 4 6.4 4 3.2-4 6.4-4 "
+                     "M7 3.5v17 M17 3.5v17"},
+    "video":   {"d": "M3 4.5h18v12H3z M8 20.5h8", "fill": "M10.5 7.5v6l5-3z"},
+    "rewind":  {"d": "M4.5 12a7.5 7.5 0 1 0 2.2-5.3 M4.5 3.5v3.7h3.7", "fill": "M10.5 9v6l4.5-3z"},
+    "chart":   {"d": "M4 3.5V20h16.5 M7.5 15.5l3.5-4 3 2.5 5-6", "dots": [(19, 8, 1.6)]},
+}
+
 FONT = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif"
 
 
@@ -293,6 +324,37 @@ def render_header(s, cfg, theme):
     return "\n".join(out)
 
 
+def render_icon(name, color, x, y, scale=1.0):
+    icon = ICONS.get(name, {"d": "M5 5h14v14H5z"})
+    out = [f'<g transform="translate({x} {y}) scale({scale})">',
+           f'<path d="{icon["d"]}" fill="none" stroke="{color}" stroke-width="1.6" '
+           f'stroke-linecap="round" stroke-linejoin="round"/>']
+    if icon.get("fill"):
+        out.append(f'<path d="{icon["fill"]}" fill="{color}"/>')
+    out += [f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{color}"/>' for cx, cy, r in icon.get("dots", [])]
+    out.append("</g>")
+    return "".join(out)
+
+
+def render_project(item, group, theme):
+    """A compact clickable row: icon tile, name, one-line summary, category label."""
+    t = THEMES[theme]
+    accent = ACCENTS[group.get("color", "blue")][theme]
+    W, H = 410, 74
+    out = svg_open(W, H, t, f"{item['name']}: {item['summary']}")
+    out.append(f'<rect x="14" y="14" width="46" height="46" rx="12" fill="{accent}" '
+               f'fill-opacity="{0.10 if theme == "light" else 0.16}"/>')
+    out.append(render_icon(item.get("icon", ""), accent, 21, 21, 32 / 24))
+    out.append(f'<text x="74" y="33" fill="{t["ink"]}" font-size="14.5" font-weight="600">{escape(item["name"])}</text>')
+    label = group["group"].upper()
+    out.append(f'<text x="{W - 16}" y="32" fill="{accent}" font-size="9.5" font-weight="600" letter-spacing="0.9" '
+               f'text-anchor="end">{escape(label)}</text>')
+    summary = wrap(item["summary"], 12.5, W - 74 - 16, 1)[0]
+    out.append(f'<text x="74" y="53" fill="{t["muted"]}" font-size="12.5">{escape(summary)}</text>')
+    out.append("</svg>")
+    return "\n".join(out)
+
+
 def render_stack(cfg, theme):
     """Small pills flowing across the width, groups in order, no labels or frame."""
     t = THEMES[theme]
@@ -325,23 +387,19 @@ def picture(base, alt):
             f'<img src="{base}-light.svg" width="100%" alt="{escape(alt)}"></picture>')
 
 
-def md_text(text):
-    return re.sub(r"([*_\[\]`])", r"\\\1", text)
-
-
 def render_projects(cfg, s):
-    """One short paragraph per group: the group name, then its projects as plain links.
-    Each project's one-liner is the link's hover title."""
-    blocks = []
+    """Rows of two clickable project cards."""
+    cards = []
     for group in cfg["projects"]:
-        links = []
         for item in group["items"]:
             repo = s["repos"].get(item["repo"]) or {}
             url = repo.get("url") or f"https://github.com/{USERNAME}/{item['repo']}"
-            title = item["tagline"].replace('"', "'")
-            links.append(f'[{md_text(item["name"])}]({url} "{title}")')
-        blocks.append(f"**{group['group']}**  \n" + " · ".join(links))
-    return "\n\n".join(blocks)
+            base = f"assets/projects/{item['repo']}"
+            cards.append(f'<a href="{url}"><picture><source media="(prefers-color-scheme: dark)" '
+                         f'srcset="{base}-dark.svg"><img src="{base}-light.svg" width="49%" '
+                         f'alt="{escape(item["name"])}: {escape(item["summary"])}"></picture></a>')
+    # two cards per line, so each pair sits side by side however line breaks are rendered
+    return "\n".join(" ".join(cards[i:i + 2]) for i in range(0, len(cards), 2))
 
 
 def header_alt(cfg, s):
@@ -361,7 +419,12 @@ def main():
     for theme in THEMES:
         (ASSETS / f"header-{theme}.svg").write_text(render_header(s, cfg, theme))
         (ASSETS / f"stack-{theme}.svg").write_text(render_stack(cfg, theme))
-    shutil.rmtree(ASSETS / "projects", ignore_errors=True)  # previous design's project cards
+    shutil.rmtree(ASSETS / "projects", ignore_errors=True)  # rebuilt from scratch every run
+    (ASSETS / "projects").mkdir()
+    for theme in THEMES:
+        for group in cfg["projects"]:
+            for item in group["items"]:
+                (ASSETS / "projects" / f"{item['repo']}-{theme}.svg").write_text(render_project(item, group, theme))
 
     values = {
         "HEADER": picture("assets/header", header_alt(cfg, s)),

@@ -1,182 +1,92 @@
 {
   "projects": [
     {
-      "group": "Robotics & perception",
+      "group": "Robotics",
+      "color": "blue",
       "items": [
         {
           "repo": "nanovla",
           "name": "nanoVLA",
-          "tagline": "A small vision-language-action model trained on the LIBERO manipulation benchmark. In progress.",
-          "tags": [
-            "Python",
-            "LeRobot",
-            "Robot learning"
-          ]
+          "icon": "arm",
+          "summary": "A tiny vision-language-action model for LIBERO"
         },
         {
           "repo": "6D-pose-tracking-system",
           "name": "6D Pose Tracking",
-          "tagline": "Real-time 6D pose tracking of multiple household objects from a single RGB camera.",
-          "tags": [
-            "Perception",
-            "Pose estimation"
-          ]
+          "icon": "axes",
+          "summary": "Real-time object pose from a single RGB camera"
         },
         {
           "repo": "ORB-SLAM-3-using-ROS",
           "name": "ORB-SLAM3 on ROS",
-          "tagline": "Visual SLAM with ORB-SLAM3 integrated into a ROS pipeline.",
-          "tags": [
-            "ROS",
-            "Visual SLAM"
-          ]
+          "icon": "slam",
+          "summary": "Visual SLAM wired into a ROS pipeline"
         },
         {
           "repo": "AM-RRT-motion-planning-algorithm",
-          "name": "AM-RRT* Motion Planning",
-          "tagline": "Sampling-based AM-RRT* planner, implemented and tested in Gazebo.",
-          "tags": [
-            "Gazebo",
-            "Motion planning"
-          ]
-        },
-        {
-          "repo": "robust-navigation-using-GPS-IMU",
-          "name": "GPS + IMU Navigation",
-          "tagline": "Sensor fusion for state estimation: ROS drivers, Allan variance, complementary filter, dead reckoning.",
-          "tags": [
-            "ROS",
-            "Sensor fusion"
-          ]
+          "name": "AM-RRT* Planner",
+          "icon": "tree",
+          "summary": "Sampling-based motion planning, tested in Gazebo"
         },
         {
           "repo": "structure-from-motion",
           "name": "Structure from Motion",
-          "tagline": "3D point-cloud reconstruction from unordered sets of images.",
-          "tags": [
-            "3D vision",
-            "Point clouds"
-          ]
-        },
-        {
-          "repo": "Image-Registration-and-Mosaicking",
-          "name": "Underwater Mosaicking",
-          "tagline": "Robust image registration and mosaicking for underwater archaeology.",
-          "tags": [
-            "Image registration",
-            "Computer vision"
-          ]
+          "icon": "sfm",
+          "summary": "3D point clouds from unordered photos"
         },
         {
           "repo": "qf-cuda-toolkit",
           "name": "qf-cuda-toolkit",
-          "tagline": "GPU image-processing library with chainable filters and GPU-vs-CPU benchmarks.",
-          "tags": [
-            "CUDA",
-            "C++"
-          ]
+          "icon": "grid",
+          "summary": "GPU image filters in CUDA, benchmarked vs CPU"
         }
       ]
     },
     {
-      "group": "Vision & language models",
+      "group": "Vision + language",
+      "color": "purple",
       "items": [
         {
           "repo": "VLM-Bias-Detection-with-Chain-of-Thought-Reasoning",
           "name": "VLM Bias Detection",
-          "tagline": "Detects social bias in vision-language models and explains it with chain-of-thought reasoning.",
-          "tags": [
-            "LLaVA",
-            "CLIP",
-            "LoRA"
-          ]
+          "icon": "scale",
+          "summary": "Explains bias in VLMs with chain-of-thought"
         },
         {
           "repo": "Image-Captioning-with-Vision-Transformer-and-GPT-2-",
-          "name": "ViT + GPT-2 Captioning",
-          "tagline": "Image captioning with a Vision Transformer encoder and a GPT-2 decoder, trained on MS COCO.",
-          "tags": [
-            "PyTorch",
-            "Transformers"
-          ]
-        },
-        {
-          "repo": "Visual-Agent-for-Explainable-Reasoning",
-          "name": "Explainable Visual Agent",
-          "tagline": "Fills in web forms by itself and writes a readable explanation for every action it takes.",
-          "tags": [
-            "Playwright",
-            "OpenCV"
-          ]
-        },
-        {
-          "repo": "ViT-Attention-FineGrained-Classification",
-          "name": "Fine-grained ViT",
-          "tagline": "Vision Transformer with hierarchical attention for fine-grained bird classification.",
-          "tags": [
-            "ViT",
-            "CUB-200-2011"
-          ]
+          "name": "ViT + GPT-2 Captions",
+          "icon": "caption",
+          "summary": "Image captioning: ViT encoder, GPT-2 decoder"
         }
       ]
     },
     {
-      "group": "Tools & side projects",
+      "group": "Tools",
+      "color": "orange",
       "items": [
         {
           "repo": "weft",
           "name": "Weft",
-          "tagline": "Offline-first collaborative Markdown editor. One Rust CRDT runs in the browser and on the server.",
-          "tags": [
-            "Rust",
-            "WebAssembly",
-            "TypeScript"
-          ]
+          "icon": "weave",
+          "summary": "Collaborative Markdown that works offline"
         },
         {
           "repo": "chalk",
           "name": "chalk",
-          "tagline": "Claude Code plugin that turns a paper or blog post into a narrated, animated explainer video.",
-          "tags": [
-            "Python",
-            "Manim"
-          ]
+          "icon": "video",
+          "summary": "Turns any paper into a narrated explainer video"
         },
         {
           "repo": "explainer",
           "name": "Explainer",
-          "tagline": "Claude Code skill that teaches a CS concept by building a simulation you can rewind and break.",
-          "tags": [
-            "JavaScript",
-            "Claude Code"
-          ]
+          "icon": "rewind",
+          "summary": "CS concepts as simulations you can break"
         },
         {
           "repo": "robinhood-portfolio-dashboard",
           "name": "Portfolio Dashboard",
-          "tagline": "Local dashboard for a Robinhood CSV: returns vs the S&P 500, drawdowns and allocation.",
-          "tags": [
-            "Python",
-            "ECharts"
-          ]
-        },
-        {
-          "repo": "watchqueue",
-          "name": "WatchQueue",
-          "tagline": "Helps a group of friends decide what to watch, fairly, from a shared real-time queue.",
-          "tags": [
-            "FastAPI",
-            "MongoDB"
-          ]
-        },
-        {
-          "repo": "sites",
-          "name": "sites",
-          "tagline": "Where my single-file HTML pages live. Any AI tool can publish to it from one instruction.",
-          "tags": [
-            "HTML",
-            "Static site"
-          ]
+          "icon": "chart",
+          "summary": "Your Robinhood CSV as a proper dashboard"
         }
       ]
     }
