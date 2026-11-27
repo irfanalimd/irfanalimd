@@ -1,42 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="840" height="252" viewBox="0 0 840 252" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="Mohammed Irfan Ali: GitHub stats">
-<rect x="0.5" y="0.5" width="839" height="251" rx="12" fill="#ffffff" stroke="#d0d7de"/>
-<text x="28" y="52" fill="#1f2328" font-size="26" font-weight="600" letter-spacing="-0.4">Mohammed Irfan Ali</text>
-<text x="28" y="78" fill="#59636e" font-size="14">Robotics, perception and vision-language models · Boston</text>
-<line x1="28" y1="102" x2="812" y2="102" stroke="#d0d7de"/>
-<text x="28.0" y="150" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">773</text>
-<text x="28.0" y="170" fill="#59636e" font-size="12.5">Commits</text>
-<line x1="184.8" y1="124" x2="184.8" y2="170" stroke="#d0d7de"/>
-<text x="206.8" y="150" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">619</text>
-<text x="206.8" y="170" fill="#59636e" font-size="12.5">In the past year</text>
-<line x1="341.6" y1="124" x2="341.6" y2="170" stroke="#d0d7de"/>
-<text x="363.6" y="150" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">45</text>
-<text x="363.6" y="170" fill="#59636e" font-size="12.5">Day streak</text>
-<line x1="498.4" y1="124" x2="498.4" y2="170" stroke="#d0d7de"/>
-<text x="520.4" y="150" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">44</text>
-<text x="520.4" y="170" fill="#59636e" font-size="12.5">Pull requests</text>
-<line x1="655.2" y1="124" x2="655.2" y2="170" stroke="#d0d7de"/>
-<text x="677.2" y="150" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">50</text>
-<text x="677.2" y="170" fill="#59636e" font-size="12.5">Public repos</text>
-<clipPath id="bar"><rect x="28" y="196" width="784" height="8" rx="4"/></clipPath>
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="152" viewBox="0 0 840 152" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="GitHub stats">
+<rect x="0.5" y="0.5" width="839" height="151" rx="12" fill="#ffffff" stroke="#d0d7de"/>
+<text x="28.0" y="50" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">775</text>
+<text x="28.0" y="70" fill="#59636e" font-size="12.5">Commits</text>
+<line x1="184.8" y1="24" x2="184.8" y2="70" stroke="#d0d7de"/>
+<text x="206.8" y="50" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">621</text>
+<text x="206.8" y="70" fill="#59636e" font-size="12.5">In the past year</text>
+<line x1="341.6" y1="24" x2="341.6" y2="70" stroke="#d0d7de"/>
+<text x="363.6" y="50" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">45</text>
+<text x="363.6" y="70" fill="#59636e" font-size="12.5">Day streak</text>
+<line x1="498.4" y1="24" x2="498.4" y2="70" stroke="#d0d7de"/>
+<text x="520.4" y="50" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">44</text>
+<text x="520.4" y="70" fill="#59636e" font-size="12.5">Pull requests</text>
+<line x1="655.2" y1="24" x2="655.2" y2="70" stroke="#d0d7de"/>
+<text x="677.2" y="50" fill="#1f2328" font-size="24" font-weight="600" letter-spacing="-0.3">50</text>
+<text x="677.2" y="70" fill="#59636e" font-size="12.5">Public repos</text>
+<clipPath id="bar"><rect x="28" y="96" width="784" height="8" rx="4"/></clipPath>
 <g clip-path="url(#bar)">
-<rect x="28.0" y="196" width="559.5" height="8" fill="#3572A5"><title>Python</title></rect>
-<rect x="589.5" y="196" width="129.9" height="8" fill="#f1e05a"><title>JavaScript</title></rect>
-<rect x="721.4" y="196" width="49.7" height="8" fill="#3178c6"><title>TypeScript</title></rect>
-<rect x="773.1" y="196" width="16.9" height="8" fill="#f34b7d"><title>C++</title></rect>
-<rect x="792.0" y="196" width="14.1" height="8" fill="#dea584"><title>Rust</title></rect>
-<rect x="808.1" y="196" width="3.9" height="8" fill="#555555"><title>C</title></rect>
+<rect x="28.0" y="96" width="559.5" height="8" fill="#3572A5"><title>Python</title></rect>
+<rect x="589.5" y="96" width="129.9" height="8" fill="#f1e05a"><title>JavaScript</title></rect>
+<rect x="721.4" y="96" width="49.7" height="8" fill="#3178c6"><title>TypeScript</title></rect>
+<rect x="773.1" y="96" width="16.9" height="8" fill="#f34b7d"><title>C++</title></rect>
+<rect x="792.0" y="96" width="14.1" height="8" fill="#dea584"><title>Rust</title></rect>
+<rect x="808.1" y="96" width="3.9" height="8" fill="#555555"><title>C</title></rect>
 </g>
-<circle cx="32.0" cy="226" r="4" fill="#3572A5"/>
-<text x="42.0" y="230" font-size="12" fill="#1f2328">Python<tspan fill="#818b98"> 72%</tspan></text>
-<circle cx="127.2" cy="226" r="4" fill="#f1e05a"/>
-<text x="137.2" y="230" font-size="12" fill="#1f2328">JavaScript<tspan fill="#818b98"> 17%</tspan></text>
-<circle cx="245.6" cy="226" r="4" fill="#3178c6"/>
-<text x="255.6" y="230" font-size="12" fill="#1f2328">TypeScript<tspan fill="#818b98"> 6%</tspan></text>
-<circle cx="357.1" cy="226" r="4" fill="#f34b7d"/>
-<text x="367.1" y="230" font-size="12" fill="#1f2328">C++<tspan fill="#818b98"> 2%</tspan></text>
-<circle cx="427.4" cy="226" r="4" fill="#dea584"/>
-<text x="437.4" y="230" font-size="12" fill="#1f2328">Rust<tspan fill="#818b98"> 2%</tspan></text>
-<circle cx="502.4" cy="226" r="4" fill="#555555"/>
-<text x="512.4" y="230" font-size="12" fill="#1f2328">C<tspan fill="#818b98"> &lt;1%</tspan></text>
-<text x="812" y="230" font-size="12" fill="#818b98" text-anchor="end">Since 2019 · updated Nov 27, 2026</text>
+<circle cx="32.0" cy="126" r="4" fill="#3572A5"/>
+<text x="42.0" y="130" font-size="12" fill="#1f2328">Python<tspan fill="#818b98"> 72%</tspan></text>
+<circle cx="127.2" cy="126" r="4" fill="#f1e05a"/>
+<text x="137.2" y="130" font-size="12" fill="#1f2328">JavaScript<tspan fill="#818b98"> 17%</tspan></text>
+<circle cx="245.6" cy="126" r="4" fill="#3178c6"/>
+<text x="255.6" y="130" font-size="12" fill="#1f2328">TypeScript<tspan fill="#818b98"> 6%</tspan></text>
+<circle cx="357.1" cy="126" r="4" fill="#f34b7d"/>
+<text x="367.1" y="130" font-size="12" fill="#1f2328">C++<tspan fill="#818b98"> 2%</tspan></text>
+<circle cx="427.4" cy="126" r="4" fill="#dea584"/>
+<text x="437.4" y="130" font-size="12" fill="#1f2328">Rust<tspan fill="#818b98"> 2%</tspan></text>
+<circle cx="502.4" cy="126" r="4" fill="#555555"/>
+<text x="512.4" y="130" font-size="12" fill="#1f2328">C<tspan fill="#818b98"> &lt;1%</tspan></text>
+<text x="812" y="130" font-size="12" fill="#818b98" text-anchor="end">Since 2019 · updated Nov 27, 2026</text>
 </svg>
