@@ -8,7 +8,6 @@ also counts private contributions).
 Outputs:
   README.md                      from TEMPLATE.md
   assets/header-{light,dark}.svg stats and language bar
-  assets/stack-{light,dark}.svg  tech stack
   assets/projects/*.svg          one row per project in profile.json
 """
 
@@ -353,30 +352,6 @@ def render_project(item, group, theme):
     return "\n".join(out)
 
 
-def render_stack(cfg, theme):
-    """Small pills flowing across the width, groups in order, no labels or frame."""
-    t = THEMES[theme]
-    W, chip_h, gap, size = 840, 24, 6, 12
-    items = [item for group in cfg["stack"] for item in group["items"]]
-    x, y, chips = 0.0, 1.0, []
-    for item in items:
-        w = text_width(item, size) + 20
-        if x + w > W and x:
-            x, y = 0.0, y + chip_h + gap
-        chips.append((item, x, y, w))
-        x += w + gap
-    H = int(y + chip_h + 2)
-    out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
-           f'font-family="{FONT}" role="img" aria-label="{escape("Tech stack: " + ", ".join(items))}">']
-    for item, cx, cy, w in chips:
-        out.append(f'<rect x="{cx + 0.5:.1f}" y="{cy:.1f}" width="{w - 1:.1f}" height="{chip_h}" rx="{chip_h / 2}" '
-                   f'fill="{t["chip"]}" stroke="{t["border"]}"/>')
-        out.append(f'<text x="{cx + w / 2:.1f}" y="{cy + 16:.1f}" fill="{t["ink"]}" font-size="{size}" '
-                   f'text-anchor="middle">{escape(item)}</text>')
-    out.append("</svg>")
-    return "\n".join(out)
-
-
 # ---------------------------------------------------------------------------
 # Markdown
 # ---------------------------------------------------------------------------
@@ -417,7 +392,6 @@ def main():
     ASSETS.mkdir(exist_ok=True)
     for theme in THEMES:
         (ASSETS / f"header-{theme}.svg").write_text(render_header(s, cfg, theme))
-        (ASSETS / f"stack-{theme}.svg").write_text(render_stack(cfg, theme))
     shutil.rmtree(ASSETS / "projects", ignore_errors=True)  # rebuilt from scratch every run
     (ASSETS / "projects").mkdir()
     for theme in THEMES:
@@ -428,7 +402,6 @@ def main():
     values = {
         "HEADER": picture("assets/header", header_alt(cfg, s)),
         "PROJECTS": render_projects(cfg, s),
-        "STACK": picture("assets/stack", "Tech stack"),
         "UPDATED": s["now"].strftime("%d %b %Y"),
     }
     out = TEMPLATE.read_text()

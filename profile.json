@@ -90,48 +90,5 @@
         }
       ]
     }
-  ],
-  "stack": [
-    {
-      "label": "Languages",
-      "items": [
-        "Python",
-        "C++",
-        "CUDA",
-        "C",
-        "Rust",
-        "TypeScript"
-      ]
-    },
-    {
-      "label": "Robotics",
-      "items": [
-        "ROS",
-        "Gazebo",
-        "ORB-SLAM3",
-        "RTAB-Map",
-        "PCL",
-        "Eigen"
-      ]
-    },
-    {
-      "label": "Vision & ML",
-      "items": [
-        "PyTorch",
-        "TensorFlow",
-        "OpenCV",
-        "YOLOv8",
-        "Mask2Former"
-      ]
-    },
-    {
-      "label": "Hardware & infra",
-      "items": [
-        "Jetson Orin NX",
-        "Intel RealSense",
-        "Docker",
-        "Linux"
-      ]
-    }
   ]
 }

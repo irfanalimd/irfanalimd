@@ -5,7 +5,3 @@
 ### Projects
 
 {{PROJECTS}}
-
-### Stack
-
-{{STACK}}
