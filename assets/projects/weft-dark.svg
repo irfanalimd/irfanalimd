@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="410" height="74" viewBox="0 0 410 74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="Weft: Collaborative Markdown that works offline">
-<rect x="0.5" y="0.5" width="409" height="73" rx="12" fill="#0d1117" stroke="#30363d"/>
-<rect x="14" y="14" width="46" height="46" rx="12" fill="#f0883e" fill-opacity="0.16"/>
-<g transform="translate(21 21) scale(1.3333333333333333)"><path d="M2.5 8c3.2 0 3.2 4 6.4 4s3.2-4 6.4-4 3.2 4 6.4 4 M2.5 16c3.2 0 3.2-4 6.4-4s3.2 4 6.4 4 3.2-4 6.4-4 M7 3.5v17 M17 3.5v17" fill="none" stroke="#f0883e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
-<text x="74" y="33" fill="#e6edf3" font-size="14.5" font-weight="600">Weft</text>
-<text x="394" y="32" fill="#f0883e" font-size="9.5" font-weight="600" letter-spacing="0.9" text-anchor="end">TOOLS</text>
-<text x="74" y="53" fill="#9198a1" font-size="12.5">Collaborative Markdown that works offline</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="96" viewBox="0 0 132 96" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="Weft: Collaborative Markdown that works offline">
+<rect x="39.0" y="4" width="54" height="54" rx="15" fill="#f0883e" fill-opacity="0.16"/>
+<g transform="translate(49.0 14) scale(1.4166666666666667)"><path d="M2.5 8c3.2 0 3.2 4 6.4 4s3.2-4 6.4-4 3.2 4 6.4 4 M2.5 16c3.2 0 3.2-4 6.4-4s3.2 4 6.4 4 3.2-4 6.4-4 M7 3.5v17 M17 3.5v17" fill="none" stroke="#f0883e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="66.0" y="84" fill="#e6edf3" font-size="13" font-weight="600" text-anchor="middle">Weft</text>
 </svg>

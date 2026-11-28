@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="410" height="74" viewBox="0 0 410 74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="nanoVLA: A tiny vision-language-action model for LIBERO">
-<rect x="0.5" y="0.5" width="409" height="73" rx="12" fill="#ffffff" stroke="#d0d7de"/>
-<rect x="14" y="14" width="46" height="46" rx="12" fill="#0969da" fill-opacity="0.1"/>
-<g transform="translate(21 21) scale(1.3333333333333333)"><path d="M3 21h11 M5.5 21v-2.5h6V21 M8.5 18.5L11 8.5 M11 8.5l8 2.5 M19 11l1.2-4 M19 11l3.2 2.4" fill="none" stroke="#0969da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="18.5" r="1.6" fill="#0969da"/><circle cx="11" cy="8.5" r="1.6" fill="#0969da"/></g>
-<text x="74" y="33" fill="#1f2328" font-size="14.5" font-weight="600">nanoVLA</text>
-<text x="394" y="32" fill="#0969da" font-size="9.5" font-weight="600" letter-spacing="0.9" text-anchor="end">ROBOTICS</text>
-<text x="74" y="53" fill="#59636e" font-size="12.5">A tiny vision-language-action model for LIBERO</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="132" height="96" viewBox="0 0 132 96" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif" role="img" aria-label="nanoVLA: A tiny vision-language-action model for LIBERO">
+<rect x="39.0" y="4" width="54" height="54" rx="15" fill="#0969da" fill-opacity="0.1"/>
+<g transform="translate(49.0 14) scale(1.4166666666666667)"><path d="M3 21h11 M5.5 21v-2.5h6V21 M8.5 18.5L11 8.5 M11 8.5l8 2.5 M19 11l1.2-4 M19 11l3.2 2.4" fill="none" stroke="#0969da" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="18.5" r="1.6" fill="#0969da"/><circle cx="11" cy="8.5" r="1.6" fill="#0969da"/></g>
+<text x="66.0" y="84" fill="#1f2328" font-size="13" font-weight="600" text-anchor="middle">nanoVLA</text>
 </svg>
