@@ -12,31 +12,31 @@
         },
         {
           "repo": "6D-pose-tracking-system",
-          "name": "6D Pose Tracking",
+          "name": "6D Pose",
           "icon": "axes",
           "summary": "Real-time object pose from a single RGB camera"
         },
         {
           "repo": "ORB-SLAM-3-using-ROS",
-          "name": "ORB-SLAM3 on ROS",
+          "name": "ORB-SLAM3",
           "icon": "slam",
           "summary": "Visual SLAM wired into a ROS pipeline"
         },
         {
           "repo": "AM-RRT-motion-planning-algorithm",
-          "name": "AM-RRT* Planner",
+          "name": "AM-RRT*",
           "icon": "tree",
           "summary": "Sampling-based motion planning, tested in Gazebo"
         },
         {
           "repo": "structure-from-motion",
-          "name": "Structure from Motion",
+          "name": "SfM",
           "icon": "sfm",
           "summary": "3D point clouds from unordered photos"
         },
         {
           "repo": "qf-cuda-toolkit",
-          "name": "qf-cuda-toolkit",
+          "name": "CUDA Filters",
           "icon": "grid",
           "summary": "GPU image filters in CUDA, benchmarked vs CPU"
         }
@@ -48,13 +48,13 @@
       "items": [
         {
           "repo": "VLM-Bias-Detection-with-Chain-of-Thought-Reasoning",
-          "name": "VLM Bias Detection",
+          "name": "VLM Bias",
           "icon": "scale",
           "summary": "Explains bias in VLMs with chain-of-thought"
         },
         {
           "repo": "Image-Captioning-with-Vision-Transformer-and-GPT-2-",
-          "name": "ViT + GPT-2 Captions",
+          "name": "Captioner",
           "icon": "caption",
           "summary": "Image captioning: ViT encoder, GPT-2 decoder"
         }
@@ -84,7 +84,7 @@
         },
         {
           "repo": "robinhood-portfolio-dashboard",
-          "name": "Portfolio Dashboard",
+          "name": "Portfolio",
           "icon": "chart",
           "summary": "Your Robinhood CSV as a proper dashboard"
         }

@@ -337,21 +337,19 @@ def render_icon(name, color, x, y, scale=1.0):
 
 
 def render_project(item, group, theme):
-    """A compact clickable row: icon tile, name, one-line summary, category label."""
+    """An app-icon style tile: tinted icon square with the short name underneath. No frame."""
     t = THEMES[theme]
     accent = ACCENTS[group.get("color", "blue")][theme]
-    W, H = 410, 74
-    out = svg_open(W, H, t, f"{item['name']}: {item['summary']}")
-    out.append(f'<rect x="14" y="14" width="46" height="46" rx="12" fill="{accent}" '
-               f'fill-opacity="{0.10 if theme == "light" else 0.16}"/>')
-    out.append(render_icon(item.get("icon", ""), accent, 21, 21, 32 / 24))
-    out.append(f'<text x="74" y="33" fill="{t["ink"]}" font-size="14.5" font-weight="600">{escape(item["name"])}</text>')
-    label = group["group"].upper()
-    out.append(f'<text x="{W - 16}" y="32" fill="{accent}" font-size="9.5" font-weight="600" letter-spacing="0.9" '
-               f'text-anchor="end">{escape(label)}</text>')
-    summary = wrap(item["summary"], 12.5, W - 74 - 16, 1)[0]
-    out.append(f'<text x="74" y="53" fill="{t["muted"]}" font-size="12.5">{escape(summary)}</text>')
-    out.append("</svg>")
+    W, H, tile = 132, 96, 54
+    x0 = (W - tile) / 2
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
+           f'font-family="{FONT}" role="img" aria-label="{escape(item['name'] + ': ' + item['summary'])}">',
+           f'<rect x="{x0}" y="4" width="{tile}" height="{tile}" rx="15" fill="{accent}" '
+           f'fill-opacity="{0.10 if theme == "light" else 0.16}"/>',
+           render_icon(item.get("icon", ""), accent, x0 + 10, 14, 34 / 24),
+           f'<text x="{W / 2}" y="84" fill="{t["ink"]}" font-size="13" font-weight="600" '
+           f'text-anchor="middle">{escape(item["name"])}</text>',
+           "</svg>"]
     return "\n".join(out)
 
 
@@ -388,7 +386,7 @@ def picture(base, alt):
 
 
 def render_projects(cfg, s):
-    """Rows of two clickable project cards."""
+    """Rows of six clickable icon tiles; the one-line summary shows on hover."""
     cards = []
     for group in cfg["projects"]:
         for item in group["items"]:
@@ -396,10 +394,11 @@ def render_projects(cfg, s):
             url = repo.get("url") or f"https://github.com/{USERNAME}/{item['repo']}"
             base = f"assets/projects/{item['repo']}"
             cards.append(f'<a href="{url}"><picture><source media="(prefers-color-scheme: dark)" '
-                         f'srcset="{base}-dark.svg"><img src="{base}-light.svg" width="49%" '
-                         f'alt="{escape(item["name"])}: {escape(item["summary"])}"></picture></a>')
-    # two cards per line, so each pair sits side by side however line breaks are rendered
-    return "\n".join(" ".join(cards[i:i + 2]) for i in range(0, len(cards), 2))
+                         f'srcset="{base}-dark.svg"><img src="{base}-light.svg" width="15.6%" '
+                         f'alt="{escape(item["name"])}: {escape(item["summary"])}" '
+                         f'title="{escape(item["summary"])}"></picture></a>')
+    # six tiles per markdown line, so each row stays together however line breaks are rendered
+    return "\n".join(" ".join(cards[i:i + 6]) for i in range(0, len(cards), 6))
 
 
 def header_alt(cfg, s):
